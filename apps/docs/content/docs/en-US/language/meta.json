@@ -1,5 +1,7 @@
 {
   "title": "Language",
+  "description": "Variables, types, switch, errors, memory",
+  "root": true,
   "pages": [
     "basics",
     "functions",
