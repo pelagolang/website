@@ -6,6 +6,9 @@ import { fileURLToPath } from "node:url";
 
 const pub = join(dirname(fileURLToPath(import.meta.url)), "..", "public");
 const problems = [];
+const base = (process.env.BASE_PATH || "").replace(/\/$/, "");
+// The Fumadocs app (apps/docs) is merged into the site at deploy time, under its language folders.
+const docsApp = /^\/(en-US|en-GB|es|zh-CN|ru|ar|fr|de)\//;
 const pages = [];
 (function walk(d) {
   for (const f of readdirSync(d)) {
@@ -30,7 +33,10 @@ for (const page of pages) {
   if ((html.match(/<h1[\s>]/g) || []).length !== 1) problems.push(`${rel}: needs exactly one <h1>`);
   if (/\{\{|\}\}/.test(html)) problems.push(`${rel}: unexpanded placeholder`);
   for (const m of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
-    const url = m[1];
+    let url = m[1];
+    if (base && url.startsWith(base + "/")) url = url.slice(base.length);
+    else if (base && url.startsWith("/")) problems.push(`${rel}: ${url} lacks the base path`);
+    if (docsApp.test(url)) continue;
     if (/^(https?:|mailto:|data:)/.test(url)) continue;
     if (url.startsWith("#")) {
       if (!ids(html).has(url.slice(1))) problems.push(`${rel}: missing anchor ${url}`);

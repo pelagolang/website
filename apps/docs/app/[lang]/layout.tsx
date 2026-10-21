@@ -4,6 +4,7 @@ import '../global.css';
 import localFont from 'next/font/local';
 import type { Metadata } from 'next';
 import { i18n, rtlLanguages } from '@/lib/i18n';
+import { basePath } from '@/lib/shared';
 import { translations } from '@/lib/layout.shared';
 
 const outfit = localFont({
@@ -34,7 +35,7 @@ export default async function Layout({ params, children }: LayoutProps<'/[lang]'
   return (
     <html lang={lang} dir={dir} className={outfit.className} suppressHydrationWarning>
       <body className="flex flex-col min-h-screen">
-        <RootProvider dir={dir} i18n={i18nProvider(translations, lang)}>
+        <RootProvider dir={dir} search={{ options: { type: 'static', api: `${basePath}/api/search` } }} i18n={i18nProvider(translations, lang)}>
           {children}
         </RootProvider>
       </body>

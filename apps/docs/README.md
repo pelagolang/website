@@ -1,6 +1,6 @@
 # Pelago docs
 
-The documentation site, built with [Fumadocs](https://fumadocs.dev) on Next.js. It is a separate app from the marketing site in the repository root: its own `package.json`, lockfile and Vercel project.
+The documentation site, built with [Fumadocs](https://fumadocs.dev) on Next.js. It is a separate app from the marketing site in the repository root: its own `package.json` and lockfile.
 
 ```
 cd apps/docs
@@ -27,7 +27,7 @@ The script adds the frontmatter, rewrites links between documents and to reposit
 
 ## Languages
 
-`lib/i18n.ts` lists the languages: US English (default), UK English, Spanish, Chinese (zh-CN), Russian, Arabic (right to left), French and German. Each has a folder in `content/docs/` with the same layout (`index.mdx`, `meta.json`, `language/`, `compiler/`, `project/`). US English keeps the plain `/docs/...` URLs; the others are `/<lang>/docs/...`.
+`lib/i18n.ts` lists the languages: US English (default), UK English, Spanish, Chinese (zh-CN), Russian, Arabic (right to left), French and German. Each has a folder in `content/docs/` with the same layout (`index.mdx`, `meta.json`, `language/`, `compiler/`, `project/`). Every language has its own prefix: `/en-US/docs/...`, `/es/docs/...`.
 
 A page missing in a language falls back to US English, so a language is translated page by page: copy the page from `en-US/` into the language folder at the same path and translate it (keep the frontmatter keys). To translate a section title, edit that folder's `meta.json` (`title`, `description`). UI text (search, table of contents, buttons) is in `lib/layout.shared.tsx`; `zh-CN` uses the official language pack, the others cover the visible strings and fall back to English for the rest. Pages translated by hand are not touched by the sync script, which only writes `en-US/`.
 
@@ -41,6 +41,13 @@ Do not edit `.source/`: Fumadocs MDX generates it.
 
 Colours and font follow the brand kit (teal, lagoon, deep sea, foam; Outfit). Logos in `public/brand` and the icons in `app/` are copies of `assets/brand` in the compiler repository. Outfit is under the SIL Open Font License (`app/fonts/OFL.txt`).
 
-## Deploying on Vercel
+## Deploying on GitHub Pages
 
-Create a second Vercel project from this repository and set **Root Directory** to `apps/docs`; the Next.js preset does the rest. No domain is hard-coded: `SITE_URL` or Vercel's production URL sets `metadataBase`. Keep the docs under `/docs` so they can be served from a subdomain (`docs.example.com`) or routed from the main domain later.
+The app is a static export (`output: 'export'`): `npm run build` writes plain files to `out/`. The Pages workflow in the repository root builds it with the marketing site and publishes both (see the root README). Because nothing runs on a server:
+
+- there is no middleware, so every language, English included, has its own prefix (`/en-US/docs/...`) and `/` is a small redirect page;
+- search is built once and runs in the browser (`/api/search` is a static JSON file);
+- the changelog is fetched at build time; the workflow rebuilds daily to pick up releases;
+- `NEXT_PUBLIC_BASE_PATH` sets the folder the site is served from (`/website` on a project site). Leave it unset for a custom domain or a local build.
+
+Set `SITE_URL` for absolute URLs in the page metadata; no domain is hard-coded.

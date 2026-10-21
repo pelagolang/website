@@ -6,8 +6,9 @@ export const i18n = defineI18n({
   defaultLanguage: 'en-US',
   languages: ['en-US', 'en-GB', 'es', 'zh-CN', 'ru', 'ar', 'fr', 'de'],
   parser: 'dir',
-  // US English keeps the plain /docs/... URLs; other languages are /<lang>/docs/...
-  hideLocale: 'default-locale',
+  // The site is a static export (GitHub Pages), which has no middleware to redirect, so every language,
+  // US English included, lives under its own prefix: /en-US/docs/...
+  hideLocale: 'never',
 });
 
 /** Right-to-left languages. */

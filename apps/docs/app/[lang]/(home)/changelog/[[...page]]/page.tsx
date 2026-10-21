@@ -1,6 +1,10 @@
-import { ChangelogPage } from '@/components/changelog-page';
+import { ChangelogPage, changelogParams } from '@/components/changelog-page';
 
-export const revalidate = 3600;
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return changelogParams('pelagolang', 'pelago');
+}
 
 export default async function Page(props: PageProps<'/[lang]/changelog/[[...page]]'>) {
   const { lang, page } = await props.params;

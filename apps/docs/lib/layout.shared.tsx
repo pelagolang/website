@@ -1,7 +1,7 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 import { uiTranslations } from 'fumadocs-ui/i18n';
 import { zhCN } from '@fumadocs/language/zh-cn';
-import { appName, gitConfig } from './shared';
+import { appName, basePath, gitConfig } from './shared';
 import { i18n } from './i18n';
 
 // UI text per language. Anything missing in a language shows in English. zh-CN comes from the official language
@@ -122,17 +122,17 @@ export function baseOptions(locale: string): BaseLayoutProps {
       title: (
         <>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/pelago-horizontal.svg" alt={appName} height={26} className="block h-[26px] w-auto dark:hidden" />
+          <img src={`${basePath}/brand/pelago-horizontal.svg`} alt={appName} height={26} className="block h-[26px] w-auto dark:hidden" />
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/pelago-horizontal-dark.svg" alt="" height={26} className="hidden h-[26px] w-auto dark:block" />
+          <img src={`${basePath}/brand/pelago-horizontal-dark.svg`} alt="" height={26} className="hidden h-[26px] w-auto dark:block" />
         </>
       ),
-      url: locale === i18n.defaultLanguage ? '/docs' : `/${locale}/docs`,
+      url: `/${locale}/docs`,
     },
     githubUrl: `https://github.com/${gitConfig.user}/${gitConfig.repo}`,
     links: [
-      { text: 'Changelog', url: `${locale === i18n.defaultLanguage ? '' : `/${locale}`}/changelog`, active: 'nested-url' },
-      { text: 'Roadmap', url: `${locale === i18n.defaultLanguage ? '' : `/${locale}`}/docs/project/roadmap`, active: 'nested-url' },
+      { text: 'Changelog', url: `/${locale}/changelog`, active: 'nested-url' },
+      { text: 'Roadmap', url: `/${locale}/docs/project/roadmap`, active: 'nested-url' },
       { text: 'Compiler repository', url: `https://github.com/${gitConfig.user}/${gitConfig.repo}`, external: true },
       { text: 'Examples', url: 'https://github.com/pelagolang/examples', external: true },
     ],
