@@ -1,10 +1,13 @@
 import { RootProvider } from 'fumadocs-ui/provider/next';
-import './global.css';
+import { i18nProvider } from 'fumadocs-ui/i18n';
+import '../global.css';
 import localFont from 'next/font/local';
 import type { Metadata } from 'next';
+import { i18n, rtlLanguages } from '@/lib/i18n';
+import { translations } from '@/lib/layout.shared';
 
 const outfit = localFont({
-  src: './fonts/Outfit-Variable.woff2',
+  src: '../fonts/Outfit-Variable.woff2',
   weight: '100 900',
   display: 'swap',
 });
@@ -20,11 +23,20 @@ export const metadata: Metadata = {
   description: 'Documentation for Pelago, a self-hosting systems language. Native code. No GC. No runtime.',
 };
 
-export default function Layout({ children }: LayoutProps<'/'>) {
+export function generateStaticParams() {
+  return i18n.languages.map((lang) => ({ lang }));
+}
+
+export default async function Layout({ params, children }: LayoutProps<'/[lang]'>) {
+  const { lang } = await params;
+  const dir = rtlLanguages.includes(lang) ? 'rtl' : 'ltr';
+
   return (
-    <html lang="en" className={outfit.className} suppressHydrationWarning>
+    <html lang={lang} dir={dir} className={outfit.className} suppressHydrationWarning>
       <body className="flex flex-col min-h-screen">
-        <RootProvider>{children}</RootProvider>
+        <RootProvider dir={dir} i18n={i18nProvider(translations, lang)}>
+          {children}
+        </RootProvider>
       </body>
     </html>
   );

@@ -11,7 +11,8 @@ if (!src || !existsSync(join(src, "ROADMAP.md"))) {
   console.error("usage: node scripts/sync-docs.mjs <path to a pelago checkout>");
   process.exit(1);
 }
-const out = join(dirname(fileURLToPath(import.meta.url)), "..", "content", "docs");
+// US English is the default language; other languages get their own folders next to it (see README).
+const out = join(dirname(fileURLToPath(import.meta.url)), "..", "content", "docs", "en-US");
 const repo = "https://github.com/pelagolang/pelago/blob/main";
 
 // [source file, page path under content/docs, title, description]
@@ -64,9 +65,10 @@ for (const [file, page, title, description] of pages) {
   writeFileSync(dest, `---\ntitle: ${yaml(title)}\ndescription: ${yaml(description)}\n---\n\n${text.trimEnd()}\n`);
 }
 
-const meta = (title, list) => JSON.stringify({ title, pages: list }, null, 2) + "\n";
+// Each section is a root folder: it becomes a tab, and the sidebar shows only the open section.
+const meta = (title, list, description) => JSON.stringify({ title, description, root: true, pages: list }, null, 2) + "\n";
 const names = (dir) => pages.filter(([, p]) => p.startsWith(dir + "/")).map(([, p]) => p.split("/")[1]);
-writeFileSync(join(out, "language", "meta.json"), meta("Language", names("language")));
-writeFileSync(join(out, "compiler", "meta.json"), meta("Compiler", names("compiler")));
-writeFileSync(join(out, "project", "meta.json"), meta("Project", names("project")));
+writeFileSync(join(out, "language", "meta.json"), meta("Language", names("language"), "Variables, types, switch, errors, memory"));
+writeFileSync(join(out, "compiler", "meta.json"), meta("Compiler", names("compiler"), "Lexer, parser, checker, IR, backend"));
+writeFileSync(join(out, "project", "meta.json"), meta("Project", names("project"), "Roadmap, status, brand, contributing"));
 console.log(`wrote ${pages.length} pages`);
