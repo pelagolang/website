@@ -1,0 +1,19 @@
+//~ Values are read-only by default. `inout` and `sink` are written at the call site too.
+fn bump(inout counter: int) {
+    counter += 1
+}
+
+fn total(sink xs: [int]) -> int {
+    var sum = 0
+    for x of xs { sum += x }
+    sum
+}
+
+fn main() {
+    var hits = 0
+    bump(inout hits)
+    bump(inout hits)
+
+    const scores = [3, 4, 5]
+    print("hits: #hits, total: #(total(sink scores))")
+}

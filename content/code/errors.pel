@@ -1,0 +1,23 @@
+//~ No exceptions and no null: errors are `result` values, absence is `option`, `?` passes both up.
+fn parse_all(items: [str]) -> [int] ! parse_error {
+    var out: [int] = []
+    for item of items {
+        out.push!(item.parse_int()?)
+    }
+    ok(out)
+}
+
+fn first_even(xs: [int]) -> int? {
+    for x of xs {
+        if x % 2 == 0 { return x }
+    }
+    none
+}
+
+fn main() {
+    switch parse_all(["1", "2", "x"]) {
+        case ok(values): print("parsed #(values.len()) numbers")
+        case err(e): print("bad number: #(e.message)")
+    }
+    print("first even: #(first_even([1, 3, 6]) ?? -1)")
+}

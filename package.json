@@ -1,0 +1,14 @@
+{
+  "name": "pelago-website",
+  "private": true,
+  "type": "module",
+  "description": "The Pelago website: a static site with no dependencies.",
+  "license": "MIT OR Apache-2.0",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/check.mjs",
+    "highlight": "node scripts/highlight.mjs",
+    "dev": "node scripts/build.mjs && node scripts/serve.mjs"
+  }
+}

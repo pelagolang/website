@@ -1,0 +1,46 @@
+<!--
+title: Language tour
+nav: tour
+description: A short tour of Pelago with examples that are checked against the compiler before every release of this site.
+-->
+<div class="wrap page">
+  <h1>Language tour</h1>
+  <p class="lead">Short programs, each of which type checks and runs with the current compiler. The output under each one is what <code>pelago run</code> printed.</p>
+  <ul class="toc">
+    <li><a href="#hello">Hello</a></li><li><a href="#values">Values</a></li><li><a href="#modes">Access modes</a></li><li><a href="#errors">Errors</a></li><li><a href="#enums">Enums and structs</a></li><li><a href="#closures">Closures</a></li><li><a href="#patterns">Patterns</a></li><li><a href="#overflow">Overflow</a></li>
+  </ul>
+
+  <h2 id="hello">Hello</h2>
+  <p>A program starts at <code>fn main()</code>. Source files end in <code>.pel</code>.</p>
+  {{code:hello}}
+
+  <h2 id="values">Values and loops</h2>
+  <p><code>const</code> never changes, <code>var</code> does. <code>#name</code> and <code>#(expr)</code> go inside strings. <code>//~</code> is a doc comment; an ordinary comment is <code>///</code>, because plain <code>//</code> is a lexer error with a hint.</p>
+  {{code:values}}
+
+  <h2 id="modes">Access modes</h2>
+  <p>Arguments are read-only unless you say otherwise. <code>inout</code> lets the function change the caller's value and <code>sink</code> hands it over. Both are repeated at the call, so the call site shows what happens. Memory safety comes from these rules and value semantics, not from a borrow checker.</p>
+  {{code:modes}}
+
+  <h2 id="errors">Errors and absence</h2>
+  <p>There are no exceptions and no null. <code>T ! e</code> is a result, <code>T?</code> is an option, <code>none</code> is the empty one, and <code>?</code> returns early with the error. <code>??</code> supplies a default.</p>
+  {{code:errors}}
+
+  <h2 id="enums">Enums, structs and <code>switch</code></h2>
+  <p>This is <code>examples/programs/shapes.pel</code> from the compiler repository. <code>m.shift!(…)</code> marks a method that changes its receiver.</p>
+  {{code:shapes}}
+
+  <h2 id="closures">Closures and builders</h2>
+  <p><code>x ~> x * 2</code> is a closure, and <code>~> it * 3</code> uses the implicit <code>it</code>. A list builder maps and filters in one expression.</p>
+  {{code:closures}}
+
+  <h2 id="patterns">Patterns</h2>
+  <p>One <code>switch</code> matches enums, literals, guards and lists. Leave a case out and the checker says so.</p>
+  {{code:patterns}}
+
+  <h2 id="overflow">Overflow</h2>
+  <p>Arithmetic that overflows stops the program. If you want wrapping, say so with <code>+%</code> and <code>*%</code>. The native backend keeps this behaviour, which is why the <a href="/benchmarks/">benchmarks</a> compare against C that is allowed to ignore it.</p>
+  {{code:overflow}}
+
+  <div class="note"><p>Want every syntax form? <a href="https://github.com/pelagolang/pelago/blob/main/examples/tour.pel"><code>examples/tour.pel</code></a> in the compiler repository lists them all (it shows syntax, so it is not meant to run). Real programs live in <a href="https://github.com/pelagolang/pelago/tree/main/examples/programs"><code>examples/programs</code></a>.</p></div>
+</div>

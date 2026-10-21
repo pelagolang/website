@@ -1,0 +1,8 @@
+//~ `~>` closures, `it`, and list builders.
+fn main() {
+    const numbers = [1, 2, 3, 4, 5]
+    const doubled = numbers.map(x ~> x * 2)
+    const tripled = numbers.map(~> it * 3)
+    const even_squares = [x of numbers if x % 2 == 0 ~> x * x]
+    print("#doubled #tripled #even_squares")
+}

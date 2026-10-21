@@ -1,0 +1,61 @@
+<!--
+description: Pelago is a self-hosting systems language. Native code, no garbage collector, no runtime, and memory safety from value semantics instead of a borrow checker.
+-->
+<section class="hero">
+  <div class="wrap grid">
+    <div>
+      <p class="kicker">pelagos · the open sea</p>
+      <h1>Pelago</h1>
+      <p class="tag1">A self-hosting systems language.</p>
+      <p class="tag2">Native code. No GC. No runtime.</p>
+      <div class="actions">
+        <a class="btn" href="/install/">Install</a>
+        <a class="btn alt" href="/tour/">Take the tour</a>
+      </div>
+    </div>
+    <div>{{code:hello}}</div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <h2>What it is</h2>
+    <p class="lead">Pelago compiles to native code with its own backend. There is no garbage collector and no runtime to ship. Memory is safe through value semantics, not a borrow checker, and the syntax is braces and newlines with a TypeScript-like feel.</p>
+    <ul class="cards">
+      <li class="card"><h3>Value semantics</h3><p>Values are read-only by default. <code>inout</code> and <code>sink</code> are written at the call site as well, so a call shows what it changes or consumes.</p><a class="more" href="/tour/#modes">See it</a></li>
+      <li class="card"><h3>No exceptions, no null</h3><p>Errors are <code>result</code> values, absence is <code>option</code>, and <code>?</code> passes either one up.</p><a class="more" href="/tour/#errors">See it</a></li>
+      <li class="card"><h3>One <code>switch</code></h3><p>Enums, lists and guards go through one pattern match, and exhaustiveness is checked.</p><a class="more" href="/tour/#patterns">See it</a></li>
+      <li class="card"><h3>Overflow traps</h3><p>Integer overflow stops the program instead of wrapping. The native backend keeps that exact behaviour and still measures against C.</p><a class="more" href="/benchmarks/">Benchmarks</a></li>
+      <li class="card"><h3>Its own backend</h3><p>x86-64 for Linux and Windows and AArch64, with no linker and no libc. The compiler is a single tool with a formatter and a language server inside.</p><a class="more" href="/docs/">Read the design</a></li>
+      <li class="card"><h3>Self-hosting is the goal</h3><p>The stage 0 compiler is written in Rust with no dependencies. The plan is to rewrite it in Pelago itself.</p><a class="more" href="/docs/">Roadmap</a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <h2>A small program</h2>
+    <div class="tour-grid">
+      <div>
+        <p>This is real code from the repository. It type checks, runs in the interpreter and builds to a native executable. The website checks every example the same way before it is published.</p>
+        <p><code>#name</code> and <code>#(expr)</code> put values into strings, <code>//~</code> starts a doc comment, and <code>for i of 1..=n</code> loops over an inclusive range.</p>
+        <p><a href="/tour/">More examples in the tour</a></p>
+      </div>
+      <div>{{code:values}}</div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <h2>Where it stands</h2>
+    <div class="note">
+      <p><strong>Early, and honest about it.</strong> The stage 0 compiler handles the whole language: it checks types and value semantics, runs programs in an IR interpreter and builds native executables. A formatter and a language server exist. It is not yet rewritten in Pelago, real threads and <code>async</code> suspension are still open, and there are no prebuilt downloads yet, so you build from source.</p>
+    </div>
+    <p>Pelago is <a href="https://github.com/pelagolang/pelago">open source</a> under MIT OR Apache-2.0.</p>
+    <div class="actions">
+      <a class="btn" href="/install/">Build it from source</a>
+      <a class="btn alt" href="/editors/">Editor support</a>
+    </div>
+  </div>
+</section>

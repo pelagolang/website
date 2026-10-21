@@ -1,0 +1,35 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  site:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/build.mjs
+      - run: node scripts/check.mjs
+
+  # The examples on the site must still compile and print what the site says they print.
+  examples:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: pelagolang/pelago
+          path: pelago
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: cargo build --release --manifest-path pelago/Cargo.toml
+      - run: ./pelago/target/release/pelago check content/code
+      - run: node scripts/highlight.mjs --check
+        env:
+          PELAGO: ${{ github.workspace }}/pelago/target/release/pelago

@@ -1,0 +1,24 @@
+<pre class="pelago"><code><span class="t-doc">//~ No exceptions and no null: errors are `result` values, absence is `option`, `?` passes both up.</span>
+<span class="t-decl">fn</span> <span class="t-fn">parse_all</span>(items: [<span class="t-type">str</span>]) <span class="t-op">-&gt;</span> [<span class="t-type">int</span>] <span class="t-op">!</span> parse_error {
+    <span class="t-binding">var</span> out: [<span class="t-type">int</span>] <span class="t-op">=</span> []
+    <span class="t-control">for</span> item <span class="t-control">of</span> items {
+        out.<span class="t-fn">push</span><span class="t-mark">!</span>(item.<span class="t-fn">parse_int</span>()<span class="t-opt">?</span>)
+    }
+    <span class="t-fn">ok</span>(out)
+}
+
+<span class="t-decl">fn</span> <span class="t-fn">first_even</span>(xs: [<span class="t-type">int</span>]) <span class="t-op">-&gt;</span> <span class="t-type">int</span><span class="t-opt">?</span> {
+    <span class="t-control">for</span> x <span class="t-control">of</span> xs {
+        <span class="t-control">if</span> x <span class="t-op">%</span> <span class="t-num">2</span> <span class="t-op">==</span> <span class="t-num">0</span> { <span class="t-control">return</span> x }
+    }
+    <span class="t-const">none</span>
+}
+
+<span class="t-decl">fn</span> <span class="t-fn">main</span>() {
+    <span class="t-control">switch</span> <span class="t-fn">parse_all</span>([<span class="t-str">&quot;1&quot;</span>, <span class="t-str">&quot;2&quot;</span>, <span class="t-str">&quot;x&quot;</span>]) {
+        <span class="t-control">case</span> <span class="t-fn">ok</span>(values): <span class="t-fn">print</span>(<span class="t-str">&quot;parsed </span><span class="t-interp">#(</span>values.<span class="t-fn">len</span>()<span class="t-interp">)</span><span class="t-str"> numbers&quot;</span>)
+        <span class="t-control">case</span> <span class="t-fn">err</span>(e): <span class="t-fn">print</span>(<span class="t-str">&quot;bad number: </span><span class="t-interp">#(</span>e.message<span class="t-interp">)</span><span class="t-str">&quot;</span>)
+    }
+    <span class="t-fn">print</span>(<span class="t-str">&quot;first even: </span><span class="t-interp">#(</span><span class="t-fn">first_even</span>([<span class="t-num">1</span>, <span class="t-num">3</span>, <span class="t-num">6</span>]) <span class="t-opt">??</span> <span class="t-op">-</span><span class="t-num">1</span><span class="t-interp">)</span><span class="t-str">&quot;</span>)
+}
+</code></pre>
