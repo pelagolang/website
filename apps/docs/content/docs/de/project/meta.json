@@ -1,0 +1,12 @@
+{
+  "title": "Projekt",
+  "description": "Roadmap, Stand, Marke, Mitwirken",
+  "root": true,
+  "pages": [
+    "roadmap",
+    "next",
+    "brand",
+    "commits",
+    "pr-scenarios"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "title": "Компилятор",
+  "description": "Лексер, парсер, проверка типов, IR, бэкенд",
+  "root": true,
+  "pages": [
+    "lexer",
+    "parser",
+    "checker",
+    "ir",
+    "backend",
+    "vectorise"
+  ]
+}

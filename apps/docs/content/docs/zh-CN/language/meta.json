@@ -1,0 +1,20 @@
+{
+  "title": "语言",
+  "description": "变量、类型、switch、错误、内存",
+  "root": true,
+  "pages": [
+    "basics",
+    "functions",
+    "types",
+    "switch",
+    "list-patterns",
+    "collections",
+    "errors",
+    "concurrency",
+    "memory",
+    "modules",
+    "keywords",
+    "comments",
+    "samples"
+  ]
+}

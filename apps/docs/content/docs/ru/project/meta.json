@@ -1,0 +1,12 @@
+{
+  "title": "Проект",
+  "description": "Дорожная карта, статус, бренд, участие в разработке",
+  "root": true,
+  "pages": [
+    "roadmap",
+    "next",
+    "brand",
+    "commits",
+    "pr-scenarios"
+  ]
+}

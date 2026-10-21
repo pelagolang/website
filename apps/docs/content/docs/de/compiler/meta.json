@@ -1,0 +1,13 @@
+{
+  "title": "Compiler",
+  "description": "Lexer, Parser, Prüfer, IR, Backend",
+  "root": true,
+  "pages": [
+    "lexer",
+    "parser",
+    "checker",
+    "ir",
+    "backend",
+    "vectorise"
+  ]
+}

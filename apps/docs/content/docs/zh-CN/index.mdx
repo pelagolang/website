@@ -1,0 +1,31 @@
+---
+title: Pelago 文档
+description: Pelago（一门自举的系统语言）的设计文档、编译器笔记和路线图。
+---
+
+Pelago 是一门自举的系统语言：原生代码，没有垃圾回收器，没有运行时。这些页面是与编译器一起存放在 [`pelagolang/pelago`](https://github.com/pelagolang/pelago) 中的设计文档。那里的文件才是事实来源；本站只是它们的可读副本。
+
+<Cards>
+  <Card title="语言" href="./language/basics">
+    变量、函数、类型、`switch`、集合、错误、并发、内存和模块。
+  </Card>
+  <Card title="编译器" href="./compiler/lexer">
+    词法分析器、解析器、检查器、IR 和原生后端。
+  </Card>
+  <Card title="路线图" href="./project/roadmap">
+    愿景、决策表和各个阶段。
+  </Card>
+  <Card title="目前进展" href="./project/next">
+    已完成的工作和接下来的计划。
+  </Card>
+</Cards>
+
+## 状态 [#status]
+
+第 0 阶段编译器用 Rust 编写，没有任何依赖，已能处理整门语言。它检查类型和值语义，在 IR 解释器中运行程序，并为 Linux 和 Windows 生成原生可执行文件。这些文档是设计草稿：每篇都以已做出的决定收尾，有些页面比代码更旧，所以两者不一致时，以编译器和[决策表](/docs/project/roadmap)为准。
+
+## 从这里开始 [#start-here]
+
+- **初次接触 Pelago？** [语言导览](https://github.com/pelagolang/pelago/blob/main/examples/tour.pel)展示了每一种语法形式，[examples/programs](https://github.com/pelagolang/pelago/tree/main/examples/programs) 中是可以运行的程序。
+- **想自己构建？** 克隆仓库并运行 `cargo build --release`；README 里有相关命令。
+- **想参与贡献？** 请阅读[提交与 PR 标题](/docs/project/commits)和 [PR 场景](/docs/project/pr-scenarios)。

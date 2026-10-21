@@ -1,0 +1,13 @@
+{
+  "title": "编译器",
+  "description": "词法分析器、解析器、检查器、IR、后端",
+  "root": true,
+  "pages": [
+    "lexer",
+    "parser",
+    "checker",
+    "ir",
+    "backend",
+    "vectorise"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "title": "المترجم",
+  "description": "المحلل المعجمي، المحلل النحوي، المدقق، التمثيل الوسيط IR، الواجهة الخلفية",
+  "root": true,
+  "pages": [
+    "lexer",
+    "parser",
+    "checker",
+    "ir",
+    "backend",
+    "vectorise"
+  ]
+}
