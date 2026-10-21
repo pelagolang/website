@@ -1,0 +1,79 @@
+{
+  "pages": {
+    "ar/compiler/meta.json": {
+      "source": "73cefbfb83da131d"
+    },
+    "ar/index.mdx": {
+      "source": "9cbc95ee8132adf3"
+    },
+    "ar/language/meta.json": {
+      "source": "28e8be066b872561"
+    },
+    "ar/project/meta.json": {
+      "source": "b64744b18851c428"
+    },
+    "de/compiler/meta.json": {
+      "source": "73cefbfb83da131d"
+    },
+    "de/index.mdx": {
+      "source": "9cbc95ee8132adf3"
+    },
+    "de/language/meta.json": {
+      "source": "28e8be066b872561"
+    },
+    "de/project/meta.json": {
+      "source": "b64744b18851c428"
+    },
+    "en-GB/index.mdx": {
+      "source": "9cbc95ee8132adf3"
+    },
+    "es/compiler/meta.json": {
+      "source": "73cefbfb83da131d"
+    },
+    "es/index.mdx": {
+      "source": "9cbc95ee8132adf3"
+    },
+    "es/language/meta.json": {
+      "source": "28e8be066b872561"
+    },
+    "es/project/meta.json": {
+      "source": "b64744b18851c428"
+    },
+    "fr/compiler/meta.json": {
+      "source": "73cefbfb83da131d"
+    },
+    "fr/index.mdx": {
+      "source": "9cbc95ee8132adf3"
+    },
+    "fr/language/meta.json": {
+      "source": "28e8be066b872561"
+    },
+    "fr/project/meta.json": {
+      "source": "b64744b18851c428"
+    },
+    "ru/compiler/meta.json": {
+      "source": "73cefbfb83da131d"
+    },
+    "ru/index.mdx": {
+      "source": "9cbc95ee8132adf3"
+    },
+    "ru/language/meta.json": {
+      "source": "28e8be066b872561"
+    },
+    "ru/project/meta.json": {
+      "source": "b64744b18851c428"
+    },
+    "zh-CN/compiler/meta.json": {
+      "source": "73cefbfb83da131d"
+    },
+    "zh-CN/index.mdx": {
+      "source": "9cbc95ee8132adf3"
+    },
+    "zh-CN/language/meta.json": {
+      "source": "28e8be066b872561"
+    },
+    "zh-CN/project/meta.json": {
+      "source": "b64744b18851c428"
+    }
+  }
+}

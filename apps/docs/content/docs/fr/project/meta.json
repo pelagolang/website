@@ -1,0 +1,12 @@
+{
+  "title": "Projet",
+  "description": "Feuille de route, état, marque, contribuer",
+  "root": true,
+  "pages": [
+    "roadmap",
+    "next",
+    "brand",
+    "commits",
+    "pr-scenarios"
+  ]
+}

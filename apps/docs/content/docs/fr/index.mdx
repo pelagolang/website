@@ -1,0 +1,31 @@
+---
+title: Documentation de Pelago
+description: Documents de conception, notes sur le compilateur et feuille de route de Pelago, un langage système auto-hébergé.
+---
+
+Pelago est un langage système auto-hébergé : du code natif, sans ramasse-miettes, sans runtime. Ces pages sont les documents de conception qui vivent à côté du compilateur dans [`pelagolang/pelago`](https://github.com/pelagolang/pelago). Les fichiers de ce dépôt font foi ; ce site en est une copie lisible.
+
+<Cards>
+  <Card title="Langage" href="./language/basics">
+    Variables, fonctions, types, `switch`, collections, erreurs, concurrence, mémoire et modules.
+  </Card>
+  <Card title="Compilateur" href="./compiler/lexer">
+    Le lexer, le parser, le vérificateur, l’IR et le backend natif.
+  </Card>
+  <Card title="Feuille de route" href="./project/roadmap">
+    La vision, le tableau des décisions et les phases.
+  </Card>
+  <Card title="Où nous en sommes" href="./project/next">
+    Ce qui est fait et ce qui vient ensuite.
+  </Card>
+</Cards>
+
+## État [#status]
+
+Le compilateur de l’étape 0, écrit en Rust sans dépendances, gère tout le langage. Il vérifie les types et la sémantique des valeurs, exécute les programmes dans un interpréteur d’IR et produit des exécutables natifs pour Linux et Windows. Ces documents sont des brouillons de conception : chacun se termine par les décisions prises, et certaines pages sont plus anciennes que le code ; en cas de désaccord, le compilateur et le [tableau des décisions](/docs/project/roadmap) l’emportent.
+
+## Par où commencer [#start-here]
+
+- **Nouveau sur Pelago ?** La [visite du langage](https://github.com/pelagolang/pelago/blob/main/examples/tour.pel) montre chaque forme de syntaxe, et [examples/programs](https://github.com/pelagolang/pelago/tree/main/examples/programs) rassemble des programmes qui s’exécutent.
+- **Envie de le compiler ?** Clonez le dépôt et lancez `cargo build --release` ; le README donne les commandes.
+- **Envie de contribuer ?** Lisez [Commits et titres de PR](/docs/project/commits) et [Scénarios de PR](/docs/project/pr-scenarios).

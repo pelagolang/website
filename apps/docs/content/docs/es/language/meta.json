@@ -1,0 +1,20 @@
+{
+  "title": "Lenguaje",
+  "description": "Variables, tipos, switch, errores, memoria",
+  "root": true,
+  "pages": [
+    "basics",
+    "functions",
+    "types",
+    "switch",
+    "list-patterns",
+    "collections",
+    "errors",
+    "concurrency",
+    "memory",
+    "modules",
+    "keywords",
+    "comments",
+    "samples"
+  ]
+}

@@ -55,7 +55,11 @@ export function withHeadingIds(body) {
   const slug = slugger();
   return eachHeading(body, (hashes, text, line) => (/\[#[^\]]+\]\s*$/.test(text) ? line : `${hashes} ${text} [#${slug(text)}]`)).join("\n");
 }
-const headingIds = (body) => eachHeading(body, (_h, text) => /\[#([^\]]+)\]\s*$/.exec(text)?.[1] ?? "").filter(Boolean);
+const headingIds = (body) => {
+  const ids = [];
+  eachHeading(body, (_h, text, line) => (ids.push(/\[#([^\]]+)\]\s*$/.exec(text)?.[1] ?? ""), line));
+  return ids;
+};
 
 const fences = (t) => (t.match(/^\s*(```|~~~)/gm) || []).length;
 const targets = (t) => [...t.matchAll(/\]\(([^)\s]+)/g)].map((m) => m[1]).sort().join("\n");

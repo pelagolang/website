@@ -1,0 +1,12 @@
+{
+  "title": "项目",
+  "description": "路线图、进度、品牌、参与贡献",
+  "root": true,
+  "pages": [
+    "roadmap",
+    "next",
+    "brand",
+    "commits",
+    "pr-scenarios"
+  ]
+}

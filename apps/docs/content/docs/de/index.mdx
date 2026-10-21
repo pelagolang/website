@@ -1,0 +1,31 @@
+---
+title: Pelago-Dokumentation
+description: Entwurfsdokumente, Compiler-Notizen und die Roadmap für Pelago, eine selbst gehostete Systemsprache.
+---
+
+Pelago ist eine selbst gehostete Systemsprache: nativer Code, kein Garbage Collector, keine Laufzeitumgebung. Diese Seiten sind die Entwurfsdokumente, die neben dem Compiler in [`pelagolang/pelago`](https://github.com/pelagolang/pelago) liegen. Die dortigen Dateien sind maßgeblich; diese Website ist eine gut lesbare Kopie davon.
+
+<Cards>
+  <Card title="Sprache" href="./language/basics">
+    Variablen, Funktionen, Typen, `switch`, Sammlungen, Fehler, Nebenläufigkeit, Speicher und Module.
+  </Card>
+  <Card title="Compiler" href="./compiler/lexer">
+    Der Lexer, der Parser, der Prüfer, die IR und das native Backend.
+  </Card>
+  <Card title="Roadmap" href="./project/roadmap">
+    Die Vision, die Entscheidungstabelle und die Phasen.
+  </Card>
+  <Card title="Wo wir stehen" href="./project/next">
+    Was erledigt ist und was als Nächstes kommt.
+  </Card>
+</Cards>
+
+## Stand [#status]
+
+Der Compiler der Stufe 0, in Rust ohne Abhängigkeiten geschrieben, beherrscht die ganze Sprache. Er prüft Typen und Wertsemantik, führt Programme in einem IR-Interpreter aus und erzeugt native Programme für Linux und Windows. Diese Dokumente sind Entwürfe: Jedes endet mit den getroffenen Entscheidungen, und manche Seiten sind älter als der Code. Bei Widersprüchen gelten daher der Compiler und die [Entscheidungstabelle](/docs/project/roadmap).
+
+## Hier anfangen [#start-here]
+
+- **Neu bei Pelago?** Die [Sprachtour](https://github.com/pelagolang/pelago/blob/main/examples/tour.pel) zeigt jede Syntaxform, und [examples/programs](https://github.com/pelagolang/pelago/tree/main/examples/programs) enthält lauffähige Programme.
+- **Selbst bauen?** Repository klonen und `cargo build --release` ausführen; die Befehle stehen in der README.
+- **Mitmachen?** Lies [Commits und PR-Titel](/docs/project/commits) und [PR-Szenarien](/docs/project/pr-scenarios).

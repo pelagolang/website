@@ -1,0 +1,12 @@
+{
+  "title": "المشروع",
+  "description": "خارطة الطريق، الحالة، الهوية، المساهمة",
+  "root": true,
+  "pages": [
+    "roadmap",
+    "next",
+    "brand",
+    "commits",
+    "pr-scenarios"
+  ]
+}

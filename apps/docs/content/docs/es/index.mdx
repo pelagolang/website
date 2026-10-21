@@ -1,0 +1,31 @@
+---
+title: Documentación de Pelago
+description: Documentos de diseño, notas del compilador y la hoja de ruta de Pelago, un lenguaje de sistemas autoalojado.
+---
+
+Pelago es un lenguaje de sistemas autoalojado: código nativo, sin recolector de basura y sin runtime. Estas páginas son los documentos de diseño que viven junto al compilador en [`pelagolang/pelago`](https://github.com/pelagolang/pelago). Los archivos de allí son la fuente de verdad; este sitio es una copia legible de ellos.
+
+<Cards>
+  <Card title="Lenguaje" href="./language/basics">
+    Variables, funciones, tipos, `switch`, colecciones, errores, concurrencia, memoria y módulos.
+  </Card>
+  <Card title="Compilador" href="./compiler/lexer">
+    El lexer, el parser, el verificador, la IR y el backend nativo.
+  </Card>
+  <Card title="Hoja de ruta" href="./project/roadmap">
+    La visión, la tabla de decisiones y las fases.
+  </Card>
+  <Card title="Dónde nos quedamos" href="./project/next">
+    Qué está hecho y qué viene después.
+  </Card>
+</Cards>
+
+## Estado [#status]
+
+El compilador de la etapa 0, escrito en Rust sin dependencias, maneja todo el lenguaje. Comprueba los tipos y la semántica de valores, ejecuta programas en un intérprete de IR y genera ejecutables nativos para Linux y Windows. Estos documentos son borradores de diseño: cada uno termina con las decisiones tomadas, y algunas páginas son anteriores al código, así que cuando difieren prevalecen el compilador y la [tabla de decisiones](/docs/project/roadmap).
+
+## Por dónde empezar [#start-here]
+
+- **¿Eres nuevo en Pelago?** El [recorrido por el lenguaje](https://github.com/pelagolang/pelago/blob/main/examples/tour.pel) muestra cada forma de la sintaxis, y [examples/programs](https://github.com/pelagolang/pelago/tree/main/examples/programs) reúne programas que se ejecutan.
+- **¿Quieres compilarlo?** Clona el repositorio y ejecuta `cargo build --release`; el README tiene los comandos.
+- **¿Quieres contribuir?** Lee [Commits y títulos de PR](/docs/project/commits) y [Escenarios de PR](/docs/project/pr-scenarios).
