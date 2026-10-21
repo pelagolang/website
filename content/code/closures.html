@@ -1,0 +1,9 @@
+<pre class="pelago"><code><span class="t-doc">//~ `~&gt;` closures, `it`, and list builders.</span>
+<span class="t-decl">fn</span> <span class="t-fn">main</span>() {
+    <span class="t-binding">const</span> numbers <span class="t-op">=</span> [<span class="t-num">1</span>, <span class="t-num">2</span>, <span class="t-num">3</span>, <span class="t-num">4</span>, <span class="t-num">5</span>]
+    <span class="t-binding">const</span> doubled <span class="t-op">=</span> numbers.<span class="t-fn">map</span>(x <span class="t-arrow">~&gt;</span> x <span class="t-op">*</span> <span class="t-num">2</span>)
+    <span class="t-binding">const</span> tripled <span class="t-op">=</span> numbers.<span class="t-fn">map</span>(<span class="t-arrow">~&gt;</span> <span class="t-soft">it</span> <span class="t-op">*</span> <span class="t-num">3</span>)
+    <span class="t-binding">const</span> even_squares <span class="t-op">=</span> [x <span class="t-control">of</span> numbers <span class="t-control">if</span> x <span class="t-op">%</span> <span class="t-num">2</span> <span class="t-op">==</span> <span class="t-num">0</span> <span class="t-arrow">~&gt;</span> x <span class="t-op">*</span> x]
+    <span class="t-fn">print</span>(<span class="t-str">&quot;</span><span class="t-interp">#doubled</span><span class="t-str"> </span><span class="t-interp">#tripled</span><span class="t-str"> </span><span class="t-interp">#even_squares</span><span class="t-str">&quot;</span>)
+}
+</code></pre>

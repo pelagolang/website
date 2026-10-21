@@ -1,0 +1,51 @@
+<pre class="pelago"><code><span class="t-doc">//~ Shapes and their areas: enums, `switch`, structs and methods.</span>
+
+<span class="t-decl">enum</span> <span class="t-type">shape</span> {
+    <span class="t-fn">circle</span>(radius: <span class="t-type">float</span>)
+    <span class="t-fn">rect</span>(w: <span class="t-type">float</span>, h: <span class="t-type">float</span>)
+    empty
+}
+
+<span class="t-decl">fn</span> <span class="t-fn">area</span>(s: <span class="t-type">shape</span>) <span class="t-op">-&gt;</span> <span class="t-type">float</span> {
+    <span class="t-control">switch</span> s {
+        <span class="t-control">case</span> .<span class="t-fn">circle</span>(r): <span class="t-num">3.14159</span> <span class="t-op">*</span> r <span class="t-op">*</span> r
+        <span class="t-control">case</span> .<span class="t-fn">rect</span>(w, h): w <span class="t-op">*</span> h
+        <span class="t-control">case</span> .empty: <span class="t-num">0.0</span>
+    }
+}
+
+<span class="t-decl">fn</span> <span class="t-fn">describe</span>(s: <span class="t-type">shape</span>) <span class="t-op">-&gt;</span> <span class="t-type">string</span> {
+    <span class="t-control">switch</span> s {
+        <span class="t-control">case</span> .<span class="t-fn">circle</span>(r) <span class="t-control">if</span> r <span class="t-op">&gt;</span> <span class="t-num">10.0</span>: <span class="t-str">&quot;big circle&quot;</span>
+        <span class="t-control">case</span> .<span class="t-fn">circle</span>(_): <span class="t-str">&quot;circle&quot;</span>
+        <span class="t-control">case</span> .<span class="t-fn">rect</span>(w, h): <span class="t-str">&quot;rect </span><span class="t-interp">#w</span><span class="t-str"> by </span><span class="t-interp">#h</span><span class="t-str">&quot;</span>
+        <span class="t-control">case</span> .empty: <span class="t-str">&quot;nothing&quot;</span>
+    }
+}
+
+<span class="t-decl">struct</span> <span class="t-type">point</span> {
+    x: <span class="t-type">float</span>
+    y: <span class="t-type">float</span>
+
+    <span class="t-decl">fn</span> <span class="t-fn">length</span>(<span class="t-self">self</span>) <span class="t-op">-&gt;</span> <span class="t-type">float</span> <span class="t-op">=</span> (<span class="t-self">self</span>.x <span class="t-op">*</span> <span class="t-self">self</span>.x <span class="t-op">+</span> <span class="t-self">self</span>.y <span class="t-op">*</span> <span class="t-self">self</span>.y).<span class="t-fn">sqrt</span>()
+
+    <span class="t-decl">fn</span> <span class="t-fn">shift</span>(<span class="t-mode">inout</span> <span class="t-self">self</span>, dx: <span class="t-type">float</span>, dy: <span class="t-type">float</span>) {
+        <span class="t-self">self</span>.x <span class="t-op">+=</span> dx
+        <span class="t-self">self</span>.y <span class="t-op">+=</span> dy
+    }
+}
+
+<span class="t-decl">fn</span> <span class="t-fn">main</span>() {
+    <span class="t-binding">const</span> shapes <span class="t-op">=</span> [shape.<span class="t-fn">circle</span>(radius: <span class="t-num">2.0</span>), .<span class="t-fn">rect</span>(w: <span class="t-num">3.0</span>, h: <span class="t-num">4.0</span>), .empty]
+    <span class="t-binding">var</span> total <span class="t-op">=</span> <span class="t-num">0.0</span>
+    <span class="t-control">for</span> s <span class="t-control">of</span> shapes {
+        total <span class="t-op">+=</span> <span class="t-fn">area</span>(s)
+        <span class="t-fn">print</span>(<span class="t-fn">describe</span>(s))
+    }
+    <span class="t-fn">print</span>(<span class="t-str">&quot;total: </span><span class="t-interp">#total</span><span class="t-str">&quot;</span>)
+
+    <span class="t-binding">var</span> p <span class="t-op">=</span> point { x: <span class="t-num">3.0</span>, y: <span class="t-num">4.0</span> }
+    p.<span class="t-fn">shift</span><span class="t-mark">!</span>(<span class="t-num">1.0</span>, <span class="t-num">1.0</span>)
+    <span class="t-fn">print</span>(p.<span class="t-fn">length</span>())
+}
+</code></pre>

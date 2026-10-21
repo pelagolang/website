@@ -1,0 +1,11 @@
+<pre class="pelago"><code><span class="t-doc">//~ Integer overflow traps instead of wrapping. Wrapping is spelled out with `+%` and `*%`.</span>
+<span class="t-decl">fn</span> <span class="t-fn">main</span>() {
+    <span class="t-binding">var</span> h <span class="t-op">=</span> <span class="t-num">17</span>
+    h <span class="t-op">=</span> h <span class="t-op">*%</span> <span class="t-num">31</span> <span class="t-op">+%</span> <span class="t-num">7</span>
+    <span class="t-fn">print</span>(<span class="t-str">&quot;hash: </span><span class="t-interp">#h</span><span class="t-str">&quot;</span>)
+
+    <span class="t-binding">var</span> big <span class="t-op">=</span> <span class="t-num">9223372036854775807</span>
+    big <span class="t-op">+=</span> <span class="t-num">1</span>
+    <span class="t-fn">print</span>(<span class="t-str">&quot;not reached: </span><span class="t-interp">#big</span><span class="t-str">&quot;</span>)
+}
+</code></pre>

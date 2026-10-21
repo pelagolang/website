@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{title}}</title>
+<meta name="description" content="{{description}}">
+{{canonical}}
+<meta name="theme-color" content="#0E7C86">
+<link rel="icon" href="/assets/brand/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon-180.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preload" href="/assets/fonts/Outfit-Variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{title}}">
+<meta property="og:description" content="{{description}}">
+<meta property="og:image" content="{{og_image}}">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/" aria-label="Pelago, home">
+      <img class="logo-light" src="/assets/brand/pelago-horizontal.svg" alt="Pelago" height="34">
+      <img class="logo-dark" src="/assets/brand/pelago-horizontal-dark.svg" alt="" height="34">
+    </a>
+    <nav aria-label="Main">{{nav}}<a class="gh" href="https://github.com/pelagolang/pelago">GitHub</a></nav>
+  </div>
+</header>
+<main id="main">
+{{content}}
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <p><strong>Pelago</strong> · A self-hosting systems language. · Native code. No GC. No runtime.</p>
+    <p>
+      <a href="https://github.com/pelagolang">GitHub</a> ·
+      <a href="https://github.com/pelagolang/pelago">Compiler</a> ·
+      <a href="https://github.com/pelagolang/website">This site</a> ·
+      MIT OR Apache-2.0
+    </p>
+  </div>
+</footer>
+<script>
+document.querySelectorAll("[data-copy]").forEach(function (b) {
+  var src = b.closest("figure").querySelector("[data-source]");
+  if (!src || !navigator.clipboard) return;
+  b.hidden = false;
+  b.addEventListener("click", function () {
+    navigator.clipboard.writeText(src.value).then(function () {
+      b.textContent = "Copied";
+      setTimeout(function () { b.textContent = "Copy"; }, 1500);
+    });
+  });
+});
+</script>
+</body>
+</html>

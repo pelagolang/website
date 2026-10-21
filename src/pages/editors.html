@@ -1,0 +1,26 @@
+<!--
+title: Editors
+nav: editors
+description: Syntax highlighting and a language server for Pelago in VS Code, Zed and any editor with Tree-sitter support.
+-->
+<div class="wrap page">
+  <h1>Editors</h1>
+  <p class="lead">Highlighting for <code>.pel</code> files in VS Code and Zed, and errors as you type from the language server in both. Extensions never change your theme: Pelago colours apply to <code>.pel</code> files only.</p>
+
+  <h2>Language server</h2>
+  <p>Both extensions start <code>pelago lsp</code> for diagnostics, hover, go to definition, references, completion and outline. Install the <code>pelago</code> tool first (see <a href="/install/">Install</a>) and check that <code>pelago --help</code> works in a new terminal. On Windows, restart the editor after changing <code>PATH</code>.</p>
+
+  <h2>VS Code</h2>
+  <p>Not on the Marketplace yet. Download the <code>.vsix</code> from the <a href="https://github.com/pelagolang/vscode-pelago/releases/latest">latest release</a>, then:</p>
+  <pre class="cmd">code --install-extension pelago-0.1.4.vsix</pre>
+  <p>or use the Extensions view, the <code>...</code> menu, then <em>Install from VSIX...</em>. If <code>pelago</code> is not on <code>PATH</code>, set <em>Pelago: Server Path</em> to the full path of <code>pelago.exe</code>. Source and details: <a href="https://github.com/pelagolang/vscode-pelago">vscode-pelago</a>.</p>
+
+  <h2>Zed</h2>
+  <p>Not in the Zed registry yet. Clone <a href="https://github.com/pelagolang/zed-pelago">zed-pelago</a>, open the command palette and run <em>zed: install dev extension</em>, then choose the folder. Zed builds the grammar itself, so you need Rust installed through <code>rustup</code>.</p>
+
+  <h2>Neovim, Helix and others</h2>
+  <p><a href="https://github.com/pelagolang/tree-sitter-pelago">tree-sitter-pelago</a> is a Tree-sitter grammar with highlight queries, checked against the compiler's examples. Any editor that loads Tree-sitter grammars can use it.</p>
+
+  <h2>Without an editor</h2>
+  <p><code>pelago highlight --html file.pel</code> produces the same colours as on this site, and <code>--ansi</code> prints them in a terminal.</p>
+</div>

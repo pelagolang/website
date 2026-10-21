@@ -1,0 +1,10 @@
+//~ Integer overflow traps instead of wrapping. Wrapping is spelled out with `+%` and `*%`.
+fn main() {
+    var h = 17
+    h = h *% 31 +% 7
+    print("hash: #h")
+
+    var big = 9223372036854775807
+    big += 1
+    print("not reached: #big")
+}

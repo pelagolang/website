@@ -1,0 +1,13 @@
+//~ Sum the squares of 1 to n.
+fn sum_squares(n: int) -> int {
+    var total = 0
+    for i of 1..=n {
+        total += i * i
+    }
+    return total
+}
+
+fn main() {
+    const n = 10
+    print("sum of squares up to #n: #(sum_squares(n))")
+}

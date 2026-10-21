@@ -1,0 +1,15 @@
+<pre class="pelago"><code><span class="t-doc">//~ One `switch` for everything, including list patterns. Exhaustiveness is checked.</span>
+<span class="t-decl">fn</span> <span class="t-fn">describe</span>(xs: [<span class="t-type">int</span>]) <span class="t-op">-&gt;</span> <span class="t-type">string</span> {
+    <span class="t-control">switch</span> xs {
+        <span class="t-control">case</span> []: <span class="t-str">&quot;empty&quot;</span>
+        <span class="t-control">case</span> [x]: <span class="t-str">&quot;one: </span><span class="t-interp">#x</span><span class="t-str">&quot;</span>
+        <span class="t-control">case</span> [first, <span class="t-op">...</span>, last]: <span class="t-str">&quot;from </span><span class="t-interp">#first</span><span class="t-str"> to </span><span class="t-interp">#last</span><span class="t-str">&quot;</span>
+    }
+}
+
+<span class="t-decl">fn</span> <span class="t-fn">main</span>() {
+    <span class="t-fn">print</span>(<span class="t-fn">describe</span>([]))
+    <span class="t-fn">print</span>(<span class="t-fn">describe</span>([<span class="t-num">7</span>]))
+    <span class="t-fn">print</span>(<span class="t-fn">describe</span>([<span class="t-num">1</span>, <span class="t-num">2</span>, <span class="t-num">3</span>]))
+}
+</code></pre>

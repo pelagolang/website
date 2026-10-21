@@ -1,0 +1,29 @@
+<!--
+title: Benchmarks
+nav: benchmarks
+description: Native Pelago timed against C at -O2 and Rust at -O on eleven small programs, with the method and the caveats.
+-->
+<div class="wrap page wide">
+  <h1>Benchmarks</h1>
+  <p class="lead">Native Pelago against C (<code>gcc -O2</code>) and Rust (<code>rustc -O</code>) on eleven small programs. Pelago is at or below C on {{bench:at_or_below_c}} of {{bench:rows_n}}, with a geometric mean of {{bench:geomean_c}}× of C's time. Shorter bars are faster.</p>
+  {{bench}}
+  <h2>How to read this</h2>
+  <ul>
+    <li><strong>Same behaviour, not same rules.</strong> Pelago traps on integer overflow. The C and Rust builds above do not check, so they are doing less work. The suite also has a <code>--checked</code> mode that compares against C with <code>-ftrapv</code> and Rust with overflow checks on.</li>
+    <li><strong>Where Pelago loses.</strong> <code>fib38</code> (deep recursion) is slower than C, and <code>mapwork</code> is a tie. Other programs are within a few percent, which on a shared machine is noise.</li>
+    <li><strong>Small programs.</strong> Most run for 5 to 150 ms. They test the code generator, not whole applications, and a few percent either way is not a result.</li>
+    <li><strong>Other CPUs.</strong> The AArch64 backend is slower than C so far: the geometric mean on GitHub's ARM runners was about 1.4× to 1.7× of C <code>-O2</code> on Linux, macOS and Windows (2026-10-21). x86-64 has had most of the tuning.</li>
+    <li><strong>Output is checked.</strong> Every program prints the same output as its C twin, or the script reports a mismatch.</li>
+  </ul>
+  <h2>This run</h2>
+  <dl class="dl">
+    <dt>Date</dt><dd>{{bench:date}}</dd>
+    <dt>Machine</dt><dd>{{bench:machine}}, so treat the absolute times loosely</dd>
+    <dt>Compilers</dt><dd>gcc {{bench:gcc}}, rustc {{bench:rustc}}, Pelago stage 0 native backend (optimised)</dd>
+    <dt>Method</dt><dd>best of {{bench:runs}} runs per executable</dd>
+  </dl>
+  <p>Run it yourself from a checkout of the compiler (needs <code>gcc</code> and Python 3; <code>rustc</code> adds the Rust columns):</p>
+  <pre class="cmd">sh compiler/benches/compare.sh --runs 7
+sh compiler/benches/compare.sh --checked --runs 7</pre>
+  <p>On Windows use Git Bash. The sources of every benchmark, with their C and Rust twins, are in <a href="https://github.com/pelagolang/pelago/tree/main/compiler/benches"><code>compiler/benches</code></a>.</p>
+</div>

@@ -1,0 +1,14 @@
+//~ One `switch` for everything, including list patterns. Exhaustiveness is checked.
+fn describe(xs: [int]) -> string {
+    switch xs {
+        case []: "empty"
+        case [x]: "one: #x"
+        case [first, ..., last]: "from #first to #last"
+    }
+}
+
+fn main() {
+    print(describe([]))
+    print(describe([7]))
+    print(describe([1, 2, 3]))
+}

@@ -1,0 +1,53 @@
+<!--
+title: Docs
+nav: docs
+description: Where the Pelago design documents, roadmap and task board live.
+-->
+<div class="wrap page">
+  <h1>Docs</h1>
+  <p class="lead">The documentation lives next to the compiler, in the repository, and changes with it. This page is the index.</p>
+
+  <h2>Start here</h2>
+  <ul>
+    <li><a href="https://github.com/pelagolang/pelago#readme">README</a>: what Pelago is, the commands, and the language in brief.</li>
+    <li><a href="https://github.com/pelagolang/pelago/blob/main/ROADMAP.md">ROADMAP.md</a>: the vision, the decisions table and the phases.</li>
+    <li><a href="https://github.com/pelagolang/pelago/blob/main/docs/NEXT.md">docs/NEXT.md</a>: where work stopped and what comes next.</li>
+    <li><a href="https://github.com/pelagolang/pelago/blob/main/docs/plans/BOARD.md">Task board</a>: the plan cards and their state.</li>
+    <li><a href="https://github.com/pelagolang/pelago/tree/main/examples">Examples</a>: <a href="https://github.com/pelagolang/pelago/blob/main/examples/tour.pel"><code>tour.pel</code></a> shows the syntax; <a href="https://github.com/pelagolang/pelago/tree/main/examples/programs"><code>programs/</code></a> holds programs that check and run.</li>
+  </ul>
+
+  <h2>Language design</h2>
+  <p>One document per area, each ending with the decisions that were made.</p>
+  <dl class="dl">
+    <dt><a href="https://github.com/pelagolang/pelago/blob/main/docs/design/basics.md">Basics</a></dt><dd>Variables and types.</dd>
+    <dt><a href="https://github.com/pelagolang/pelago/blob/main/docs/design/functions.md">Functions</a></dt><dd>Parameters, access modes, closures.</dd>
+    <dt><a href="https://github.com/pelagolang/pelago/blob/main/docs/design/types.md">Types</a></dt><dd><code>struct</code>, <code>enum</code>, <code>obj</code>, <code>interface</code>.</dd>
+    <dt><a href="https://github.com/pelagolang/pelago/blob/main/docs/design/switch.md">switch</a></dt><dd>Pattern matching.</dd>
+    <dt><a href="https://github.com/pelagolang/pelago/blob/main/docs/design/list-patterns.md">List patterns</a></dt><dd>Matching on the shape of a list.</dd>
+    <dt><a href="https://github.com/pelagolang/pelago/blob/main/docs/design/collections.md">Collections</a></dt><dd>Lists, maps, sets, strings and builders.</dd>
+    <dt><a href="https://github.com/pelagolang/pelago/blob/main/docs/design/errors.md">Errors</a></dt><dd>Results, options and stops.</dd>
+    <dt><a href="https://github.com/pelagolang/pelago/blob/main/docs/design/concurrency.md">Concurrency</a></dt><dd>Tasks and <code>async</code>.</dd>
+    <dt><a href="https://github.com/pelagolang/pelago/blob/main/docs/design/memory.md">Memory</a></dt><dd>Layout and ownership.</dd>
+    <dt><a href="https://github.com/pelagolang/pelago/blob/main/docs/design/modules.md">Modules</a></dt><dd>Imports and packages.</dd>
+    <dt><a href="https://github.com/pelagolang/pelago/blob/main/docs/design/keywords.md">Keywords</a></dt><dd>The word list, hard and soft.</dd>
+    <dt><a href="https://github.com/pelagolang/pelago/blob/main/docs/design/comments.md">Comments</a></dt><dd>Why <code>///</code> and <code>//~</code>.</dd>
+  </dl>
+
+  <h2>The compiler</h2>
+  <dl class="dl">
+    <dt><a href="https://github.com/pelagolang/pelago/blob/main/docs/design/lexer.md">Lexer</a></dt><dd>Tokens and the rules they follow.</dd>
+    <dt><a href="https://github.com/pelagolang/pelago/blob/main/docs/design/parser.md">Parser</a></dt><dd>Syntax and its checks.</dd>
+    <dt><a href="https://github.com/pelagolang/pelago/blob/main/docs/design/checker.md">Checker</a></dt><dd>Names, types and value semantics.</dd>
+    <dt><a href="https://github.com/pelagolang/pelago/blob/main/docs/design/ir.md">IR</a></dt><dd>Lowering to the intermediate form.</dd>
+    <dt><a href="https://github.com/pelagolang/pelago/blob/main/docs/design/backend.md">Backend</a></dt><dd>Native x86-64 code from the IR.</dd>
+    <dt><a href="https://github.com/pelagolang/pelago/blob/main/docs/design/vectorise.md">Vectoriser</a></dt><dd>Speed work for the backend.</dd>
+    <dt><a href="https://github.com/pelagolang/pelago/blob/main/docs/design/brand.md">Brand</a></dt><dd>The logo, colours and fonts.</dd>
+  </dl>
+
+  <h2>Contributing</h2>
+  <ul>
+    <li><a href="https://github.com/pelagolang/pelago/blob/main/docs/contributing/commits.md">Commit and PR titles</a> use Conventional Commits.</li>
+    <li><a href="https://github.com/pelagolang/pelago/blob/main/docs/contributing/pr-scenarios.md">PR scenarios</a> show how to fill the pull request template.</li>
+    <li><a href="https://github.com/pelagolang/pelago/issues">Issues</a> are open on the compiler repository.</li>
+  </ul>
+</div>

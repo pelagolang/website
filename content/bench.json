@@ -1,0 +1,101 @@
+{
+ "date": "2026-10-21",
+ "runs": 5,
+ "machine": "4-core x86-64 Linux cloud VM",
+ "gcc": "13.3.0",
+ "rustc": "1.97.0",
+ "geomean_c": 0.83,
+ "geomean_rust": 0.74,
+ "at_or_below_c": 9,
+ "rows": [
+  {
+   "name": "collatz",
+   "pelago": 0.0595,
+   "c_o2": 0.0804,
+   "rust": 0.0544,
+   "ratio_o2": 0.74,
+   "ratio_rust": 1.09
+  },
+  {
+   "name": "divmod",
+   "pelago": 0.027,
+   "c_o2": 0.0299,
+   "rust": 0.0296,
+   "ratio_o2": 0.9,
+   "ratio_rust": 0.91
+  },
+  {
+   "name": "fib38",
+   "pelago": 0.1184,
+   "c_o2": 0.0767,
+   "rust": 0.1561,
+   "ratio_o2": 1.54,
+   "ratio_rust": 0.76
+  },
+  {
+   "name": "floatloop",
+   "pelago": 0.1357,
+   "c_o2": 0.1479,
+   "rust": 0.1343,
+   "ratio_o2": 0.92,
+   "ratio_rust": 1.01
+  },
+  {
+   "name": "list_sum",
+   "pelago": 0.0248,
+   "c_o2": 0.0297,
+   "rust": 0.0291,
+   "ratio_o2": 0.83,
+   "ratio_rust": 0.85
+  },
+  {
+   "name": "loop_sum",
+   "pelago": 0.3256,
+   "c_o2": 0.3322,
+   "rust": 0.3323,
+   "ratio_o2": 0.98,
+   "ratio_rust": 0.98
+  },
+  {
+   "name": "mapwork",
+   "pelago": 0.0095,
+   "c_o2": 0.0093,
+   "rust": 0.0164,
+   "ratio_o2": 1.03,
+   "ratio_rust": 0.58
+  },
+  {
+   "name": "sieve",
+   "pelago": 0.0492,
+   "c_o2": 0.066,
+   "rust": 0.0806,
+   "ratio_o2": 0.75,
+   "ratio_rust": 0.61
+  },
+  {
+   "name": "strbuild",
+   "pelago": 0.0042,
+   "c_o2": 0.0044,
+   "rust": 0.0089,
+   "ratio_o2": 0.95,
+   "ratio_rust": 0.47
+  },
+  {
+   "name": "structloop",
+   "pelago": 0.0034,
+   "c_o2": 0.0093,
+   "rust": 0.0055,
+   "ratio_o2": 0.37,
+   "ratio_rust": 0.62
+  },
+  {
+   "name": "tak",
+   "pelago": 0.106,
+   "c_o2": 0.1675,
+   "rust": 0.205,
+   "ratio_o2": 0.63,
+   "ratio_rust": 0.52
+  }
+ ],
+ "rows_n": 11
+}

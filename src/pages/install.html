@@ -1,0 +1,43 @@
+<!--
+title: Install
+nav: install
+description: Build the Pelago compiler from source on Windows, Linux or macOS and run your first program.
+-->
+<div class="wrap page">
+  <h1>Install</h1>
+  <p class="lead">There are no prebuilt downloads yet, so you build the tool from source. It has no dependencies besides Rust, and a release build takes about half a minute.</p>
+
+  <h2>1. Get Rust</h2>
+  <p>Install the stable toolchain from <a href="https://rustup.rs">rustup.rs</a>. On Windows that is <code>rustup-init.exe</code>.</p>
+
+  <h2>2. Build Pelago</h2>
+  <p>In PowerShell (the same commands work in any shell):</p>
+  <pre class="cmd">git clone https://github.com/pelagolang/pelago
+cd pelago
+cargo build --release</pre>
+  <p>The tool is <code>target\release\pelago.exe</code> on Windows and <code>target/release/pelago</code> elsewhere. To put it on your <code>PATH</code> in one step:</p>
+  <pre class="cmd">cargo install --path compiler</pre>
+  <p>Cargo's bin folder (<code>%USERPROFILE%\.cargo\bin</code> on Windows) must be on your <code>PATH</code>; rustup normally adds it. Restart the terminal afterwards.</p>
+
+  <h2>3. Run something</h2>
+  <pre class="cmd">pelago run examples\hello.pel
+pelago build -o hello examples\hello.pel
+.\hello</pre>
+  <p><code>run</code> checks the program and runs it in the interpreter (add <code>--native</code> to build and run machine code). <code>build</code> writes a native executable, with no linker and no libc involved. Without installing, replace <code>pelago</code> with <code>cargo run --release --</code>.</p>
+
+  <h2>Commands</h2>
+  <dl class="dl">
+    <dt><code>pelago check &lt;path&gt;</code></dt><dd>Parse, resolve names and check types.</dd>
+    <dt><code>pelago run &lt;path&gt;</code></dt><dd>Run <code>main</code> in the interpreter. <code>--opt</code> optimises first, <code>--stats</code> counts, <code>--native</code> uses machine code.</dd>
+    <dt><code>pelago build -o out &lt;path&gt;</code></dt><dd>Native executable. <code>--target=windows</code> or Linux, <code>--arch=aarch64</code>, <code>--no-opt</code>, <code>--leak-check</code>.</dd>
+    <dt><code>pelago fmt &lt;path&gt;</code></dt><dd>Format <code>.pel</code> files in place; <code>--check</code> only reports.</dd>
+    <dt><code>pelago lsp</code></dt><dd>The language server, used by the <a href="/editors/">editor extensions</a>.</dd>
+    <dt><code>pelago highlight &lt;file&gt;</code></dt><dd>Colour a file as ANSI, HTML or plain text.</dd>
+  </dl>
+  <p>The full list is in the <a href="https://github.com/pelagolang/pelago#commands">README</a>.</p>
+
+  <h2>Targets</h2>
+  <p>Native builds target x86-64 Linux (ELF) and Windows (PE), and AArch64 on Linux and Windows. Cross-compiling needs no extra tools.</p>
+
+  <div class="note"><p>Installers and release binaries will be linked here when they exist. Watch <a href="https://github.com/pelagolang/pelago/releases">the releases page</a>.</p></div>
+</div>

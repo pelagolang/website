@@ -1,0 +1,20 @@
+<pre class="pelago"><code><span class="t-doc">//~ Values are read-only by default. `inout` and `sink` are written at the call site too.</span>
+<span class="t-decl">fn</span> <span class="t-fn">bump</span>(<span class="t-mode">inout</span> counter: <span class="t-type">int</span>) {
+    counter <span class="t-op">+=</span> <span class="t-num">1</span>
+}
+
+<span class="t-decl">fn</span> <span class="t-fn">total</span>(<span class="t-mode">sink</span> xs: [<span class="t-type">int</span>]) <span class="t-op">-&gt;</span> <span class="t-type">int</span> {
+    <span class="t-binding">var</span> sum <span class="t-op">=</span> <span class="t-num">0</span>
+    <span class="t-control">for</span> x <span class="t-control">of</span> xs { sum <span class="t-op">+=</span> x }
+    sum
+}
+
+<span class="t-decl">fn</span> <span class="t-fn">main</span>() {
+    <span class="t-binding">var</span> hits <span class="t-op">=</span> <span class="t-num">0</span>
+    <span class="t-fn">bump</span>(<span class="t-mode">inout</span> hits)
+    <span class="t-fn">bump</span>(<span class="t-mode">inout</span> hits)
+
+    <span class="t-binding">const</span> scores <span class="t-op">=</span> [<span class="t-num">3</span>, <span class="t-num">4</span>, <span class="t-num">5</span>]
+    <span class="t-fn">print</span>(<span class="t-str">&quot;hits: </span><span class="t-interp">#hits</span><span class="t-str">, total: </span><span class="t-interp">#(</span><span class="t-fn">total</span>(<span class="t-mode">sink</span> scores)<span class="t-interp">)</span><span class="t-str">&quot;</span>)
+}
+</code></pre>
