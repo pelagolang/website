@@ -11,7 +11,7 @@ import { notFound } from 'next/navigation';
 import { getMDXComponents } from '@/components/mdx';
 import type { Metadata } from 'next';
 import { createRelativeLink } from 'fumadocs-ui/mdx';
-import { getPageImageUrl, getPageMarkdownUrl } from '@/lib/shared';
+import { basePath, getPageImageUrl, getPageMarkdownUrl } from '@/lib/shared';
 
 export default async function Page(props: PageProps<'/[lang]/docs/[[...slug]]'>) {
   const params = await props.params;
@@ -19,7 +19,8 @@ export default async function Page(props: PageProps<'/[lang]/docs/[[...slug]]'>)
   if (!page) notFound();
 
   const MDX = page.data.body;
-  const markdownUrl = getPageMarkdownUrl(page).url;
+  const RelativeLink = createRelativeLink(source, page);
+  const markdownUrl = `${basePath}${getPageMarkdownUrl(page).url}`;
 
   return (
     <DocsPage toc={page.data.toc} full={page.data.full}>
@@ -36,7 +37,8 @@ export default async function Page(props: PageProps<'/[lang]/docs/[[...slug]]'>)
         <MDX
           components={getMDXComponents({
             // this allows you to link to other pages with relative file paths
-            a: createRelativeLink(source, page),
+            // pages link to each other as /docs/...; the language prefix is added here
+            a: (props) => <RelativeLink {...props} href={props.href?.startsWith('/docs') ? `/${params.lang}${props.href}` : props.href} />,
           })}
         />
       </DocsBody>
@@ -57,7 +59,7 @@ export async function generateMetadata(props: PageProps<'/[lang]/docs/[[...slug]
     title: page.data.title,
     description: page.data.description,
     openGraph: {
-      images: getPageImageUrl(page).url,
+      images: `${basePath}${getPageImageUrl(page).url}`,
     },
   };
 }

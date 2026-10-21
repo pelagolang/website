@@ -14,11 +14,13 @@ const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, 
 let site = (process.env.SITE_URL || "").trim();
 if (!site && process.env.VERCEL_PROJECT_PRODUCTION_URL) site = `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
 site = site.replace(/\/$/, "");
+// BASE_PATH is the folder the site is served from ('/website' on a GitHub Pages project site; empty on a custom domain).
+const base = (process.env.BASE_PATH || "").trim().replace(/\/$/, "");
 
 const layout = read("src", "layout.html");
 const nav = [
   ["tour", "/tour/", "Tour"],
-  ["docs", "/docs/", "Docs"],
+  ["docs", "/en-US/docs/", "Docs"],
   ["benchmarks", "/benchmarks/", "Benchmarks"],
   ["install", "/install/", "Install"],
   ["editors", "/editors/", "Editors"],
@@ -80,9 +82,10 @@ for (const file of pages) {
     .replace(/\{\{title\}\}/g, esc(title))
     .replace(/\{\{description\}\}/g, esc(meta.description || "Pelago is a self-hosting systems language. Native code. No GC. No runtime."))
     .replace(/\{\{nav\}\}/g, navHtml)
-    .replace(/\{\{canonical\}\}/g, site ? `<link rel="canonical" href="${site}${path}">` : "")
-    .replace(/\{\{og_image\}\}/g, `${site}/assets/brand/og-1200x630.png`)
-    .replace(/\{\{content\}\}/g, () => expand(body));
+    .replace(/\{\{canonical\}\}/g, site ? `<link rel="canonical" href="${site}${base}${path}">` : "")
+    .replace(/\{\{og_image\}\}/g, `${site}${base}/assets/brand/og-1200x630.png`)
+    .replace(/\{\{content\}\}/g, () => expand(body))
+    .replace(/(href|src)="\/(?!\/)/g, `$1="${base}/`);
   const dest = name === "index" || name === "404" ? join(out, `${name}.html`) : join(out, name, "index.html");
   mkdirSync(dirname(dest), { recursive: true });
   writeFileSync(dest, page);
@@ -90,15 +93,21 @@ for (const file of pages) {
 
 cpSync(join(root, "src", "assets"), join(out, "assets"), { recursive: true });
 cpSync(join(root, "src", "static"), out, { recursive: true });
+if (base) {
+  const css = join(out, "assets", "site.css");
+  writeFileSync(css, readFileSync(css, "utf8").replace(/url\("\//g, `url("${base}/`));
+  const manifest = join(out, "site.webmanifest");
+  writeFileSync(manifest, readFileSync(manifest, "utf8").replace(/"src": "\//g, `"src": "${base}/`));
+}
 writeFileSync(
   join(out, "robots.txt"),
-  `User-agent: *\nAllow: /\n${site ? `Sitemap: ${site}/sitemap.xml\n` : ""}`
+  `User-agent: *\nAllow: /\n${site ? `Sitemap: ${site}${base}/sitemap.xml\n` : ""}`
 );
 if (site) {
   const urls = pages.filter((f) => f !== "404.html").map((f) => (f === "index.html" ? "/" : `/${f.slice(0, -5)}/`));
   writeFileSync(
     join(out, "sitemap.xml"),
-    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `<url><loc>${site}${u}</loc></url>`).join("\n")}\n</urlset>\n`
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `<url><loc>${site}${base}${u}</loc></url>`).join("\n")}\n</urlset>\n`
   );
 }
 console.log(`built ${pages.length} pages into public/${site ? ` (site ${site})` : " (no site URL, relative links)"}`);

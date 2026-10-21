@@ -1,0 +1,75 @@
+name: pages
+
+# Builds the marketing site and the docs app, merges them into one folder and deploys it to GitHub Pages
+# (Settings, Pages, Source: GitHub Actions). It also runs every day so the changelog picks up new releases.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "17 5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+        id: pages
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: apps/docs/package-lock.json
+
+      # base_path is "/website" on a project site and empty with a custom domain; origin is the site's address.
+      - name: Marketing site
+        run: |
+          node scripts/build.mjs
+          node scripts/check.mjs
+        env:
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}
+          SITE_URL: ${{ steps.pages.outputs.origin }}
+
+      - name: Docs app
+        working-directory: apps/docs
+        run: |
+          npm ci
+          npm run build
+        env:
+          NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+          SITE_URL: ${{ steps.pages.outputs.origin }}
+          GITHUB_TOKEN: ${{ github.token }}
+
+      # The docs app owns the language folders (/en-US/, /es/, ...), the marketing site owns the rest.
+      - name: Merge
+        run: |
+          mkdir site
+          cp -r apps/docs/out/. site/
+          rm -f site/index
+          cp -r public/. site/
+          touch site/.nojekyll
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
