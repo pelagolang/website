@@ -6,6 +6,9 @@
     "ar/index.mdx": {
       "source": "9cbc95ee8132adf3"
     },
+    "ar/language/basics.md": {
+      "source": "69795b0de1b9bb87"
+    },
     "ar/language/meta.json": {
       "source": "28e8be066b872561"
     },
@@ -18,6 +21,9 @@
     "de/index.mdx": {
       "source": "9cbc95ee8132adf3"
     },
+    "de/language/basics.md": {
+      "source": "69795b0de1b9bb87"
+    },
     "de/language/meta.json": {
       "source": "28e8be066b872561"
     },
@@ -27,11 +33,17 @@
     "en-GB/index.mdx": {
       "source": "9cbc95ee8132adf3"
     },
+    "en-GB/language/basics.md": {
+      "source": "69795b0de1b9bb87"
+    },
     "es/compiler/meta.json": {
       "source": "73cefbfb83da131d"
     },
     "es/index.mdx": {
       "source": "9cbc95ee8132adf3"
+    },
+    "es/language/basics.md": {
+      "source": "69795b0de1b9bb87"
     },
     "es/language/meta.json": {
       "source": "28e8be066b872561"
@@ -45,6 +57,9 @@
     "fr/index.mdx": {
       "source": "9cbc95ee8132adf3"
     },
+    "fr/language/basics.md": {
+      "source": "69795b0de1b9bb87"
+    },
     "fr/language/meta.json": {
       "source": "28e8be066b872561"
     },
@@ -57,6 +72,9 @@
     "ru/index.mdx": {
       "source": "9cbc95ee8132adf3"
     },
+    "ru/language/basics.md": {
+      "source": "69795b0de1b9bb87"
+    },
     "ru/language/meta.json": {
       "source": "28e8be066b872561"
     },
@@ -68,6 +86,9 @@
     },
     "zh-CN/index.mdx": {
       "source": "9cbc95ee8132adf3"
+    },
+    "zh-CN/language/basics.md": {
+      "source": "69795b0de1b9bb87"
     },
     "zh-CN/language/meta.json": {
       "source": "28e8be066b872561"
