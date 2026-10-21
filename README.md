@@ -2,6 +2,8 @@
 
 The site for [Pelago](https://github.com/pelagolang/pelago): a static site with no dependencies and no framework. Pages are plain HTML in `src/pages/`, wrapped by `src/layout.html` and assembled by one Node script into `public/`.
 
+The documentation site is a separate Fumadocs app in [`apps/docs`](apps/docs); this README is about the marketing site.
+
 ## Why this stack
 
 A language site is mostly text and code. Plain HTML and CSS load instantly, work without JavaScript (one small script adds copy buttons), need no `npm install`, and cannot break when a framework changes. Vercel serves the output as is. A heavier generator would add a dependency tree to maintain for six pages.

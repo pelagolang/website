@@ -1,0 +1,31 @@
+---
+title: Pelago documentation
+description: Design documents, compiler notes and the roadmap for Pelago, a self-hosting systems language.
+---
+
+Pelago is a self-hosting systems language: native code, no garbage collector, no runtime. These pages are the design documents that live next to the compiler in [`pelagolang/pelago`](https://github.com/pelagolang/pelago). The files there are the source of truth; this site is a readable copy of them.
+
+<Cards>
+  <Card title="Language" href="/docs/language/basics">
+    Variables, functions, types, `switch`, collections, errors, concurrency, memory and modules.
+  </Card>
+  <Card title="Compiler" href="/docs/compiler/lexer">
+    The lexer, parser, checker, IR and native backend.
+  </Card>
+  <Card title="Roadmap" href="/docs/project/roadmap">
+    The vision, the decisions table and the phases.
+  </Card>
+  <Card title="Where we stopped" href="/docs/project/next">
+    What is done and what comes next.
+  </Card>
+</Cards>
+
+## Status
+
+The stage 0 compiler, written in Rust with no dependencies, handles the whole language. It checks types and value semantics, runs programs in an IR interpreter and builds native executables for Linux and Windows. These documents are design drafts: each ends with the decisions that were made, and some pages are older than the code, so when they disagree the compiler and the [decisions table](/docs/project/roadmap) win.
+
+## Start here
+
+- **New to Pelago?** The [language tour](https://github.com/pelagolang/pelago/blob/main/examples/tour.pel) shows every syntax form, and [examples/programs](https://github.com/pelagolang/pelago/tree/main/examples/programs) holds programs that run.
+- **Want to build it?** Clone the repository and run `cargo build --release`; the README has the commands.
+- **Want to contribute?** Read [Commits and PR titles](/docs/project/commits) and [PR scenarios](/docs/project/pr-scenarios).
