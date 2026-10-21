@@ -31,6 +31,10 @@ The script adds the frontmatter, rewrites links between documents and to reposit
 
 A page missing in a language falls back to US English, so a language is translated page by page: copy the page from `en-US/` into the language folder at the same path and translate it (keep the frontmatter keys). To translate a section title, edit that folder's `meta.json` (`title`, `description`). UI text (search, table of contents, buttons) is in `lib/layout.shared.tsx`; `zh-CN` uses the official language pack, the others cover the visible strings and fall back to English for the rest. Pages translated by hand are not touched by the sync script, which only writes `en-US/`.
 
+### Keeping translations in step
+
+No translation API is used. `node scripts/translations.mjs status` lists the pages that are missing or stale in each language (a page is stale when its English source changed since it was translated); `prepare`, `check` and `record` cover translating one page, validating it and marking it current. Rules for translators are in [`TRANSLATING.md`](TRANSLATING.md). The sync script and the translations land in the same pull request, so the languages never lag behind the source for long.
+
 ## Versions
 
 Not set up: Pelago has no released versions yet. When it does, follow Fumadocs' root type pattern: one folder per version, each with `{"title": "0.1", "root": "version"}` in its `meta.json`, and the docs layout gets a version switcher.
