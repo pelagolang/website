@@ -131,6 +131,7 @@ export function baseOptions(locale: string): BaseLayoutProps {
     },
     githubUrl: `https://github.com/${gitConfig.user}/${gitConfig.repo}`,
     links: [
+      { text: 'Changelog', url: `${locale === i18n.defaultLanguage ? '' : `/${locale}`}/changelog`, active: 'nested-url' },
       { text: 'Roadmap', url: `${locale === i18n.defaultLanguage ? '' : `/${locale}`}/docs/project/roadmap`, active: 'nested-url' },
       { text: 'Compiler repository', url: `https://github.com/${gitConfig.user}/${gitConfig.repo}`, external: true },
       { text: 'Examples', url: 'https://github.com/pelagolang/examples', external: true },
