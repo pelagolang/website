@@ -21,6 +21,10 @@ node scripts/sync-docs.mjs ..\..\..\pelago     # path to a checkout of pelagolan
 
 The script adds the frontmatter, rewrites links between documents and to repository files, and writes `.md` files (not `.mdx`) so braces and angle brackets in the text are never read as JSX. To add a page, add a line to the `pages` list in the script.
 
+## Changelog
+
+`/changelog` lists the GitHub releases of `pelagolang/pelago` and `/changelog/vscode` those of `pelagolang/vscode-pelago`, using Fumadocs' changelog component (`components/changelog.tsx`, installed with `npx @fumadocs/cli add changelog`) and `@fumadocs/changelog`. Pages are cached for an hour. GitHub allows 60 unauthenticated requests an hour; set a `GITHUB_TOKEN` environment variable on the host to raise that. While a repository has no releases the page says so, and if GitHub cannot be reached it says that instead of failing.
+
 ## Languages
 
 `lib/i18n.ts` lists the languages: US English (default), UK English, Spanish, Chinese (zh-CN), Russian, Arabic (right to left), French and German. Each has a folder in `content/docs/` with the same layout (`index.mdx`, `meta.json`, `language/`, `compiler/`, `project/`). US English keeps the plain `/docs/...` URLs; the others are `/<lang>/docs/...`.
