@@ -1,0 +1,30 @@
+@import 'tailwindcss';
+@import 'fumadocs-ui/css/neutral.css';
+@import 'fumadocs-ui/css/preset.css';
+
+html {
+  scrollbar-gutter: stable;
+}
+
+html > body[data-scroll-locked] {
+  margin-right: 0px !important;
+  --removed-body-scroll-bar-size: 0px !important;
+}
+
+/* Pelago brand: Teal #0E7C86, Lagoon #5FD0C8, Deep Sea #0B2239, Foam #F4F6F8. */
+:root {
+  --color-fd-background: #f4f6f8;
+  --color-fd-foreground: #0b2239;
+  --color-fd-primary: #0e7c86;
+  --color-fd-primary-foreground: #ffffff;
+  --color-fd-ring: #0e7c86;
+}
+.dark {
+  --color-fd-background: #0b2239;
+  --color-fd-foreground: #f4f6f8;
+  --color-fd-card: #10304c;
+  --color-fd-popover: #10304c;
+  --color-fd-primary: #5fd0c8;
+  --color-fd-primary-foreground: #0b2239;
+  --color-fd-ring: #5fd0c8;
+}

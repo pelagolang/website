@@ -1,0 +1,11 @@
+{
+  "title": "Compiler",
+  "pages": [
+    "lexer",
+    "parser",
+    "checker",
+    "ir",
+    "backend",
+    "vectorise"
+  ]
+}
