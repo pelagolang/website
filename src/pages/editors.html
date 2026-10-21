@@ -11,9 +11,9 @@ description: Syntax highlighting and a language server for Pelago in VS Code, Ze
   <p>Both extensions start <code>pelago lsp</code> for diagnostics, hover, go to definition, references, completion and outline. Install the <code>pelago</code> tool first (see <a href="/install/">Install</a>) and check that <code>pelago --help</code> works in a new terminal. On Windows, restart the editor after changing <code>PATH</code>.</p>
 
   <h2>VS Code</h2>
-  <p>Not on the Marketplace yet. Download the <code>.vsix</code> from the <a href="https://github.com/pelagolang/vscode-pelago/releases/latest">latest release</a>, then:</p>
-  <pre class="cmd">code --install-extension pelago-0.1.4.vsix</pre>
-  <p>or use the Extensions view, the <code>...</code> menu, then <em>Install from VSIX...</em>. If <code>pelago</code> is not on <code>PATH</code>, set <em>Pelago: Server Path</em> to the full path of <code>pelago.exe</code>. Source and details: <a href="https://github.com/pelagolang/vscode-pelago">vscode-pelago</a>.</p>
+  <p>Install <a href="https://marketplace.visualstudio.com/items?itemName=pelagolang.pelago">Pelago on the Visual Studio Marketplace</a>, or from a terminal:</p>
+  <pre class="cmd">code --install-extension pelagolang.pelago</pre>
+  <p>You can also search for <em>Pelago</em> in the Extensions view. If <code>pelago</code> is not on <code>PATH</code>, set <em>Pelago: Server Path</em> to the full path of <code>pelago.exe</code>. To install a build by hand, download the <code>.vsix</code> from the <a href="https://github.com/pelagolang/vscode-pelago/releases/latest">latest release</a> and use the <code>...</code> menu in the Extensions view, then <em>Install from VSIX...</em>. Source and details: <a href="https://github.com/pelagolang/vscode-pelago">vscode-pelago</a>.</p>
 
   <h2>Zed</h2>
   <p>Not in the Zed registry yet. Clone <a href="https://github.com/pelagolang/zed-pelago">zed-pelago</a>, open the command palette and run <em>zed: install dev extension</em>, then choose the folder. Zed builds the grammar itself, so you need Rust installed through <code>rustup</code>.</p>
