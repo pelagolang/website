@@ -9,6 +9,15 @@
     "ar/language/basics.md": {
       "source": "69795b0de1b9bb87"
     },
+    "ar/language/comments.md": {
+      "source": "da3e31d00ef466d7"
+    },
+    "ar/language/list-patterns.md": {
+      "source": "78a2e154d99d283d"
+    },
+    "ar/language/memory.md": {
+      "source": "7e43318bc8f5c9af"
+    },
     "ar/language/meta.json": {
       "source": "28e8be066b872561"
     },
@@ -24,6 +33,15 @@
     "de/language/basics.md": {
       "source": "69795b0de1b9bb87"
     },
+    "de/language/comments.md": {
+      "source": "da3e31d00ef466d7"
+    },
+    "de/language/list-patterns.md": {
+      "source": "78a2e154d99d283d"
+    },
+    "de/language/memory.md": {
+      "source": "7e43318bc8f5c9af"
+    },
     "de/language/meta.json": {
       "source": "28e8be066b872561"
     },
@@ -36,6 +54,15 @@
     "en-GB/language/basics.md": {
       "source": "69795b0de1b9bb87"
     },
+    "en-GB/language/comments.md": {
+      "source": "da3e31d00ef466d7"
+    },
+    "en-GB/language/list-patterns.md": {
+      "source": "78a2e154d99d283d"
+    },
+    "en-GB/language/memory.md": {
+      "source": "7e43318bc8f5c9af"
+    },
     "es/compiler/meta.json": {
       "source": "73cefbfb83da131d"
     },
@@ -44,6 +71,15 @@
     },
     "es/language/basics.md": {
       "source": "69795b0de1b9bb87"
+    },
+    "es/language/comments.md": {
+      "source": "da3e31d00ef466d7"
+    },
+    "es/language/list-patterns.md": {
+      "source": "78a2e154d99d283d"
+    },
+    "es/language/memory.md": {
+      "source": "7e43318bc8f5c9af"
     },
     "es/language/meta.json": {
       "source": "28e8be066b872561"
@@ -60,6 +96,15 @@
     "fr/language/basics.md": {
       "source": "69795b0de1b9bb87"
     },
+    "fr/language/comments.md": {
+      "source": "da3e31d00ef466d7"
+    },
+    "fr/language/list-patterns.md": {
+      "source": "78a2e154d99d283d"
+    },
+    "fr/language/memory.md": {
+      "source": "7e43318bc8f5c9af"
+    },
     "fr/language/meta.json": {
       "source": "28e8be066b872561"
     },
@@ -75,6 +120,15 @@
     "ru/language/basics.md": {
       "source": "69795b0de1b9bb87"
     },
+    "ru/language/comments.md": {
+      "source": "da3e31d00ef466d7"
+    },
+    "ru/language/list-patterns.md": {
+      "source": "78a2e154d99d283d"
+    },
+    "ru/language/memory.md": {
+      "source": "7e43318bc8f5c9af"
+    },
     "ru/language/meta.json": {
       "source": "28e8be066b872561"
     },
@@ -89,6 +143,15 @@
     },
     "zh-CN/language/basics.md": {
       "source": "69795b0de1b9bb87"
+    },
+    "zh-CN/language/comments.md": {
+      "source": "da3e31d00ef466d7"
+    },
+    "zh-CN/language/list-patterns.md": {
+      "source": "78a2e154d99d283d"
+    },
+    "zh-CN/language/memory.md": {
+      "source": "7e43318bc8f5c9af"
     },
     "zh-CN/language/meta.json": {
       "source": "28e8be066b872561"
