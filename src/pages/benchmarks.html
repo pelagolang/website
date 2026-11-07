@@ -1,29 +1,37 @@
 <!--
 title: Benchmarks
 nav: benchmarks
-description: Native Pelago timed against C at -O2 and Rust at -O on eleven small programs, with the method and the caveats.
+description: Native Pelago timed against C at -O2 and Rust at -O on 41 programs, with binary sizes, the method, and the programs where Pelago is slower.
 -->
 <div class="wrap page wide">
   <h1>Benchmarks</h1>
-  <p class="lead">Native Pelago against C (<code>gcc -O2</code>) and Rust (<code>rustc -O</code>) on eleven small programs. Pelago is at or below C on {{bench:at_or_below_c}} of {{bench:rows_n}}, with a geometric mean of {{bench:geomean_c}}× of C's time. Shorter bars are faster.</p>
+  <p class="lead">Native Pelago against C (<code>gcc -O2</code>) and Rust (<code>rustc -O</code>) on {{bench:rows_n}} small programs, measured on {{bench:date}}. Across the {{bench:mean_n}} programs that run long enough to time, Pelago's geometric mean is {{bench:geomean_c}}× of C's time and {{bench:geomean_rust}}× of Rust's. It is at or below C on {{bench:at_or_below_c}} of them, at or below Rust on {{bench:at_or_below_rust}}, and at or below both on {{bench:at_or_below_both}}. Shorter bars are faster.</p>
   {{bench}}
+  <p class="note">† runs in under 2 ms: start-up noise, shown but left out of the means and the counts.</p>
+  <h2>Where Pelago is slower</h2>
+  <p>Pelago is not faster than C everywhere, and the table shows every row. Against <code>gcc -O2</code> the largest gaps are <code>structlist</code> (2.20×), <code>bintrees</code> (2.07×), <code>matmul</code> (1.84×), <code>mapwork</code> (1.76×), <code>knucleotide</code> (1.57×) and <code>resultpath</code> (1.56×). Against Rust the largest are <code>structlist</code> (1.64×), <code>collatz</code> (1.56×), <code>levenshtein</code> (1.44×) and <code>knucleotide</code> (1.43×). Others are slower by a third or less: <code>fib38</code>, <code>blur</code>, <code>lru</code>, <code>nbody</code>, <code>mandelbrot</code>, <code>fannkuch</code> and <code>kostya_bf_bench</code>.</p>
+  <p>Two rows need context. <code>bintrees</code> is 7.6× slower than a hand-tuned C++ variant that allocates from an arena (3.8 ms against Pelago's 29 ms), and <code>levenshtein</code> is 1.5× slower than <code>clang -O2</code> (0.133 s against 0.200 s) even though it ties <code>gcc -O2</code>. The table compares against <code>gcc -O2</code> as published; the full per-compiler numbers are in the run linked below.</p>
   <h2>How to read this</h2>
   <ul>
-    <li><strong>Same behaviour, not same rules.</strong> Pelago traps on integer overflow. The C and Rust builds above do not check, so they are doing less work. The suite also has a <code>--checked</code> mode that compares against C with <code>-ftrapv</code> and Rust with overflow checks on.</li>
-    <li><strong>Where Pelago loses.</strong> <code>fib38</code> (deep recursion) is slower than C, and <code>mapwork</code> is a tie. Other programs are within a few percent, which on a shared machine is noise.</li>
-    <li><strong>Small programs.</strong> Most run for 5 to 150 ms. They test the code generator, not whole applications, and a few percent either way is not a result.</li>
-    <li><strong>Other CPUs.</strong> The AArch64 backend is slower than C so far: the geometric mean on GitHub's ARM runners was about 1.4× to 1.7× of C <code>-O2</code> on Linux, macOS and Windows (2026-10-21). x86-64 has had most of the tuning.</li>
-    <li><strong>Output is checked.</strong> Every program prints the same output as its C twin, or the script reports a mismatch.</li>
+    <li><strong>Same behaviour, not same rules.</strong> Pelago traps on integer overflow. The C and Rust builds above do not check, so they do less work. The same run also builds C with <code>-ftrapv</code> and Rust with overflow checks on. Against those, Pelago's geometric mean is {{bench:geomean_trapv}}× of <code>gcc -ftrapv</code> and {{bench:geomean_rust_checked}}× of checked Rust.</li>
+    <li><strong>Small programs.</strong> Most run for a few to a few hundred milliseconds. They test the code generator, not whole applications, and a few percent either way is not a result.</li>
+    <li><strong>Output is checked.</strong> Every program prints the same output as its C twin, or the harness reports a mismatch.</li>
+    <li><strong>The programs are ours.</strong> Some follow the public problem descriptions of well-known suites (such as kostya and bddicken). They are rewrites, not the original sources, and each has C, C++, Rust and Pelago versions in the compiler repository.</li>
+    <li><strong>Other CPUs.</strong> The same run also measured AArch64 (Linux on GitHub's and Blacksmith's ARM runners). Those results are in the run's artifacts but are not summarised on this page yet, so no ARM figure is claimed here. The x86-64 backend has had the most tuning.</li>
+    <li><strong>Small and register-poor targets.</strong> The harness does not yet measure microcontroller-class hardware or a register-limited code generator, so this page makes no claim about them.</li>
   </ul>
+  <h2>Binary size</h2>
+  <p>Pelago writes executables directly, with no linker and no C library, so they are small: between 2 and 19 KiB here, against 16 to 20 KiB for <code>gcc -O2</code> and about 4.4 MiB for <code>rustc -O</code>. <code>tcc</code>, the small C compiler, still produces smaller files than Pelago on 31 of the 41 programs (typically 3 to 6 KiB against Pelago's 5 to 12). Closing that gap is a goal; it is not reached.</p>
+  {{bench-sizes}}
   <h2>This run</h2>
   <dl class="dl">
     <dt>Date</dt><dd>{{bench:date}}</dd>
-    <dt>Machine</dt><dd>{{bench:machine}}, so treat the absolute times loosely</dd>
-    <dt>Compilers</dt><dd>gcc {{bench:gcc}}, rustc {{bench:rustc}}, Pelago stage 0 native backend (optimised)</dd>
-    <dt>Method</dt><dd>best of {{bench:runs}} runs per executable</dd>
+    <dt>Machine</dt><dd>{{bench:machine}}. Bare-metal runners are less noisy than shared ones, but absolute times still vary between runs</dd>
+    <dt>Source</dt><dd>Pelago commit {{bench:commit}}, optimised native backend; the <a href="https://github.com/pelagolang/pelago/actions/runs/42412991206"><code>bench-harness</code> run</a> holds the full tables and raw numbers</dd>
+    <dt>Method</dt><dd>problem size medium; at least {{bench:runs}} timed runs per executable after one warm-up, the fastest and slowest 20% dropped, median reported (more runs while noisy)</dd>
+    <dt>Compilers</dt><dd><code>gcc -O2</code>, <code>rustc -O</code>, <code>tcc</code>, <code>clang -O2</code>, <code>g++ -O2</code> as installed on Ubuntu 24.04 and the stable Rust toolchain on the day; Pelago stage 0 native backend</dd>
   </dl>
-  <p>Run it yourself from a checkout of the compiler (needs <code>gcc</code> and Python 3; <code>rustc</code> adds the Rust columns):</p>
-  <pre class="cmd">sh compiler/benches/compare.sh --runs 7
-sh compiler/benches/compare.sh --checked --runs 7</pre>
-  <p>On Windows use Git Bash. The sources of every benchmark, with their C and Rust twins, are in <a href="https://github.com/pelagolang/pelago/tree/main/compiler/benches"><code>compiler/benches</code></a>.</p>
+  <p>Run it yourself from a checkout of the compiler (needs <code>gcc</code> and Python 3; the other compilers add their columns):</p>
+  <pre class="cmd">python3 bench/harness/run.py --runs 5 --size medium</pre>
+  <p>The sources of every benchmark, with their C, C++ and Rust twins, are in <a href="https://github.com/pelagolang/pelago/tree/main/bench"><code>bench</code></a> in the compiler repository, and the workflow is <code>bench-harness</code> under its Actions tab.</p>
 </div>

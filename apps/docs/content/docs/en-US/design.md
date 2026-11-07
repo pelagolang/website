@@ -21,17 +21,17 @@ This page explains the choices behind the language and what to expect from the c
 
 Overflow and bounds checks are part of the language, so they stay in optimised code. The optimiser removes a check only when it can prove it cannot fail, and it never changes what a program prints or when it stops. Programs that need wrapping arithmetic ask for it explicitly with `+%`, `-%` and `*%`, which do not check.
 
-C and Rust release builds normally leave overflow unchecked, so a comparison with them is a comparison of programs that do slightly different work. The [benchmarks page](../../../benchmarks/) is explicit about that.
+C and Rust release builds normally leave overflow unchecked, so a comparison with them is a comparison of programs that do slightly different work. The [benchmarks page](../../../benchmarks/) is explicit about that, and also compares against C and Rust built with overflow checks on.
 
 ## Size and build speed
 
-Executables are small because nothing is linked in that the program does not use. A hello-world program is about 2.5 KB for x86-64 Linux and 3.5 KB for Windows. Small programs compile and start in tens of milliseconds, and `pelago run --timings` shows where the time goes.
+Executables are small because nothing is linked in that the program does not use. Small programs compile and start in tens of milliseconds, and `pelago run --timings` shows where the time goes. Measured binary sizes, next to C and Rust, are on the [benchmarks page](../../../benchmarks/).
 
 ## Measuring speed
 
-Speed is measured by compiling small programs with Pelago, with C at `-O2` and with Rust at `-O`, running each several times and comparing the best time. Every program prints the same output as its C twin, or the comparison reports a mismatch. The [benchmarks page](../../../benchmarks/) shows a dated snapshot with the machine and compiler versions, and the sources of every benchmark are in the compiler repository under `compiler/benches`.
+Speed is measured by compiling small programs with Pelago, with C at `-O2` and with Rust at `-O`, running each several times and comparing the median time. Every program prints the same output as its C twin, or the comparison reports a mismatch. The [benchmarks page](../../../benchmarks/) shows a dated snapshot with the machine and the method, including the programs where Pelago is slower, and the sources of every benchmark are in the compiler repository under `bench`.
 
-Some honest limits: the programs are small, so a few percent either way is noise; results come from shared machines; and the x86-64 backend has had far more tuning than the AArch64 one.
+Some honest limits: the programs are small, so a few percent either way is noise; results come from cloud machines; and the x86-64 backend has had far more tuning than the AArch64 one.
 
 ## Where the language is heading
 
