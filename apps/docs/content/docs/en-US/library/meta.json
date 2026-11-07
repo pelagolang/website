@@ -1,0 +1,6 @@
+{
+  "title": "Standard library",
+  "description": "core and std",
+  "root": true,
+  "pages": ["index", "lists", "maps-and-sets", "strings", "numbers", "options-and-results", "io", "os", "json", "regex", "big"]
+}
