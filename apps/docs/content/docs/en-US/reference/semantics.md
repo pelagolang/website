@@ -35,7 +35,9 @@ An error that a caller may reasonably handle is a `result`, not a stop.
 
 ## Cleanup
 
-When a scope ends, the values it owns are released in reverse order of declaration, running each type's `deinit` first. A value moved out earlier is released by its new owner. A program that ends with allocations still live is reported by `--leak-check`.
+When a scope ends, the values it owns are released in reverse order of declaration, running each type's `deinit` first. A value moved out earlier is released by its new owner. A `defer` statement runs when its block ends, including by `return`, `?`, `break` or `continue`, in reverse order of declaration; it does not run when the program stops.
+
+A program that ends with allocations still live is reported by `--leak-check`.
 
 ## Exhaustiveness
 
