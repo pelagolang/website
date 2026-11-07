@@ -1,0 +1,6 @@
+{
+  "title": "Tour",
+  "description": "A guided walk through the language",
+  "root": true,
+  "pages": ["index"]
+}

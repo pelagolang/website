@@ -5,7 +5,7 @@ description: Write, check, run and build your first Pelago program.
 
 Pelago source files end in `.pel`. Create a file called `hello.pel`:
 
-```
+```pelago
 fn main() {
     print("Hello, world")
 }
@@ -15,11 +15,11 @@ Every program starts at a function called `main`. `print` writes its argument an
 
 Run it:
 
-```
+```sh
 pelago run hello.pel
 ```
 
-```
+```text
 Hello, world
 ```
 
@@ -27,7 +27,7 @@ Hello, world
 
 Strings can embed values: `#name` inserts a variable, and `#(expression)` inserts the result of any expression. Create `greet.pel`:
 
-```
+```pelago
 fn greet(name: string) -> string {
     return "Hello, #name!"
 }
@@ -42,11 +42,11 @@ fn main() {
 }
 ```
 
-```
+```sh
 pelago run greet.pel
 ```
 
-```
+```text
 Hello, Pelago!
 sum: 6
 ```
@@ -62,14 +62,14 @@ A few things to notice:
 
 The checker reports problems with the file, line and column. This program mixes up a type:
 
-```
+```pelago error
 fn main() {
     const n: int = "five"
     print(n)
 }
 ```
 
-```
+```text
 bad:2:20: error: this has type `string`, but `int` is expected
 ```
 
@@ -77,9 +77,9 @@ bad:2:20: error: this has type `string`, but `int` is expected
 
 ## Build an executable
 
-```
+```sh
 pelago build -o hello hello.pel
 ./hello
 ```
 
-`build` writes a native executable. Use `hello.exe` and `.\hello` in PowerShell on Windows. The next page covers the commands and their options.
+`build` writes a native executable. Use `hello.exe` and `.\hello` in PowerShell on Windows. The next page covers the commands and their options, and the [tour](../tour) introduces the rest of the language.

@@ -15,13 +15,13 @@ description: "The everyday pelago commands: check, run, build and format."
 
 ## Running
 
-```
+```sh
 pelago run hello.pel
 ```
 
 `run` uses native code by default. On a platform where that is not available, or when you want to compare behaviour, run the IR interpreter instead:
 
-```
+```sh
 pelago run --interp hello.pel
 ```
 
@@ -29,7 +29,7 @@ The interpreter also takes `--opt` to optimise first and `--stats` to count exec
 
 ## Building
 
-```
+```sh
 pelago build -o hello hello.pel
 ```
 
@@ -50,7 +50,7 @@ Executables are standalone: there is no linker step and no C library to install 
 
 `main` may take the arguments as a list of strings. The first element is the program name. Pass arguments to a built executable:
 
-```
+```pelago exit
 import std.os
 
 fn main(args: [string]) {
@@ -62,12 +62,12 @@ fn main(args: [string]) {
 }
 ```
 
-```
+```sh
 pelago build -o args args.pel
 ./args Sea
 ```
 
-```
+```text
 hello, Sea
 ```
 
@@ -77,7 +77,7 @@ hello, Sea
 
 A program that finishes `main` exits with status 0. When Pelago detects a fault such as integer overflow, it stops the program, prints a message and exits with a non-zero status:
 
-```
+```pelago
 fn main() {
     var x: int = 9223372036854775807
     x += 1
@@ -85,7 +85,7 @@ fn main() {
 }
 ```
 
-```
+```text
 stopped: arithmetic overflow
 ```
 
@@ -93,7 +93,7 @@ Overflow is never silently wrapped, in debug or optimised builds alike.
 
 ## Formatting
 
-```
+```sh
 pelago fmt src
 pelago fmt --check src
 ```

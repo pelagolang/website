@@ -13,7 +13,7 @@ Both extensions start `pelago lsp` in the background. It provides errors as you 
 
 Install **Pelago** from the Visual Studio Marketplace, search for it in the Extensions view, or run:
 
-```
+```sh
 code --install-extension pelagolang.pelago
 ```
 
@@ -31,7 +31,7 @@ The extension is not in the Zed registry yet. Clone [zed-pelago](https://github.
 
 `pelago highlight` colours a file in a terminal or as HTML:
 
-```
+```sh
 pelago highlight --ansi hello.pel
 pelago highlight --html hello.pel
 ```

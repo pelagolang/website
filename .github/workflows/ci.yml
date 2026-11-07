@@ -33,6 +33,10 @@ jobs:
       - run: node scripts/highlight.mjs --check
         env:
           PELAGO: ${{ github.workspace }}/pelago/target/release/pelago
+      # Every ```pelago block in the docs must compile and print what the page says (see apps/docs/scripts/check-samples.mjs).
+      - run: node apps/docs/scripts/check-samples.mjs
+        env:
+          PELAGO: ${{ github.workspace }}/pelago/target/release/pelago
 
   # The Fumadocs app in apps/docs is its own project (its own package.json and lockfile).
   docs:

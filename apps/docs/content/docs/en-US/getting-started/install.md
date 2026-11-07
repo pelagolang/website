@@ -13,7 +13,7 @@ Install the stable toolchain from [rustup.rs](https://rustup.rs). On Windows, do
 
 The commands are the same in PowerShell, bash and zsh.
 
-```
+```sh
 git clone https://github.com/pelagolang/pelago
 cd pelago
 cargo install --path compiler
@@ -25,7 +25,7 @@ If you would rather not install it, `cargo build --release` leaves the tool at `
 
 ## 3. Check that it works
 
-```
+```sh
 pelago run examples/hello.pel
 ```
 

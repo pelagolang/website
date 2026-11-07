@@ -4,11 +4,21 @@ import { i18n } from './i18n';
 import { docsContentRoute, docsImageRoute, docsRoute } from './shared';
 import { defineDocs } from 'fumadocs-mdx/macro';
 import { metaSchema, pageSchema } from 'fumadocs-core/source/schema';
+import { applyMdxPreset } from 'fumadocs-mdx/config';
+import pelagoGrammar from './pelago.tmLanguage.json';
 
 const docs = defineDocs({
   dir: 'content/docs',
   docs: {
     schema: pageSchema,
+    // Code blocks marked `pelago` are coloured with the same TextMate grammar the editors use (copied from
+    // pelagolang/pelago, editors/textmate). `sh` and `text` blocks use Shiki's built-in languages.
+    mdxOptions: applyMdxPreset({
+      rehypeCodeOptions: {
+        themes: { light: 'github-light', dark: 'github-dark' },
+        langs: [{ ...(pelagoGrammar as object), name: 'pelago' } as never],
+      },
+    }),
     postprocess: {
       includeProcessedMarkdown: true,
     },

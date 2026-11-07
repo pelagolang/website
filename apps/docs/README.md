@@ -15,7 +15,7 @@ Node 22 or later. The same commands work in PowerShell.
 
 Pages are in `content/docs/<language>/`; `meta.json` files order them. Each section (for example `getting-started/`) is a root folder, so it shows as a tab and the sidebar shows only the open one. `index.mdx` is the landing page.
 
-The docs are written here, for readers of the language: guides, reference and tools. They are not a mirror of the compiler repository's design notes, and internal material (decision logs, plans, compiler internals) does not belong on this site. Every code sample must compile; check it with `pelago run` (or `pelago check`) before committing. Pages are `.md` where no components are needed, so braces and angle brackets are never read as JSX.
+The docs are written here, for readers of the language: guides, reference and tools. They are not a mirror of the compiler repository's design notes, and internal material (decision logs, plans, compiler internals) does not belong on this site. Every code sample must compile, and CI checks it: mark a program as ```` ```pelago ````, give its output in the ```` ```text ```` block right after it, and run `PELAGO=path/to/pelago node scripts/check-samples.mjs` (see the header of that script for the `error`, `exit` and `frag` variants). Shell commands use ```` ```sh ````. Pelago blocks are coloured with `lib/pelago.tmLanguage.json`, a copy of the editors' grammar from `pelagolang/pelago` (`editors/textmate`); refresh it when keywords change. Pages are `.md` where no components are needed, so braces and angle brackets are never read as JSX.
 
 ## Changelog
 
