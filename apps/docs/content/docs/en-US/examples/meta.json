@@ -1,0 +1,6 @@
+{
+  "title": "Examples",
+  "description": "Short programs that run",
+  "root": true,
+  "pages": ["index"]
+}
