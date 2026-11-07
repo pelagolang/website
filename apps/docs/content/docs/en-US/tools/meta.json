@@ -1,0 +1,6 @@
+{
+  "title": "Tools",
+  "description": "The pelago command, its configuration, formatter and language server",
+  "root": true,
+  "pages": ["cli", "targets", "pelago-toml", "formatter", "language-server"]
+}

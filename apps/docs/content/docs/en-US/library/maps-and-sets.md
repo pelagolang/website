@@ -19,6 +19,8 @@ A map is created with a literal, `map { key: value, ... }`, and typed `map<K, V>
 | `keys()` | `iter<K>` | |
 | `values()` | `iter<V>` | |
 
+When the key is a variable rather than a literal, hand it over with `sink`: `stock.insert!(sink name, 5)`. Use `copy name` if you still need it afterwards.
+
 ```pelago
 fn main() {
     var stock: map<string, int> = map { "apples": 3 }
