@@ -1,0 +1,6 @@
+{
+  "title": "Language reference",
+  "description": "Precise rules for syntax and meaning",
+  "root": true,
+  "pages": ["lexical", "keywords", "operators", "types", "declarations", "semantics"]
+}
