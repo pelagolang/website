@@ -19,11 +19,10 @@ const base = (process.env.BASE_PATH || "").trim().replace(/\/$/, "");
 
 const layout = read("src", "layout.html");
 const nav = [
-  ["tour", "/tour/", "Tour"],
   ["docs", "/en-US/docs/", "Docs"],
+  ["tour", "/en-US/docs/tour/", "Tour"],
+  ["design", "/en-US/docs/design/", "Design"],
   ["benchmarks", "/benchmarks/", "Benchmarks"],
-  ["install", "/install/", "Install"],
-  ["editors", "/editors/", "Editors"],
 ];
 
 function code(name, { run = true } = {}) {
