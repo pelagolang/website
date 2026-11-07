@@ -6,7 +6,7 @@ The documentation site is a separate Fumadocs app in [`apps/docs`](apps/docs); t
 
 ## Why this stack
 
-A language site is mostly text and code. Plain HTML and CSS load instantly, work without JavaScript (one small script adds copy buttons), need no `npm install`, and cannot break when a framework changes. Any static host serves the output as is. A heavier generator would add a dependency tree to maintain for six pages.
+A language site is mostly text and code. Plain HTML and CSS load instantly, work without JavaScript (one small script adds copy buttons), need no `npm install`, and cannot break when a framework changes. Any static host serves the output as is. A heavier generator would add a dependency tree to maintain for a handful of pages. The documentation lives in `apps/docs`; the install, tour and editors pages here only point to it.
 
 ## Commands
 
