@@ -95,6 +95,46 @@ closing a
 
 This is the pattern for files, sockets and locks: the resource is closed when its owner goes away, without a `finally` block.
 
+## `defer`
+
+`defer` runs a statement when the enclosing block ends, however it ends: at the closing brace, or at an early `return`, a `?`, a `break` or a `continue`. Several defers run in reverse order, and inside a loop body a defer runs on every round. Use it for cleanup that belongs next to the code it cleans up after.
+
+```pelago
+fn work(fail: bool) -> int ! string {
+    defer print("cleanup one")
+    defer print("cleanup two")
+    print("working")
+    if fail { return err("failed") }
+    ok(1)
+}
+
+fn main() {
+    switch work(false) { case ok(_): print("done") case err(e): print(e) }
+    switch work(true) { case ok(_): print("done") case err(e): print(e) }
+    for i of 0..2 {
+        defer print("end of round #i")
+        print("round #i")
+    }
+}
+```
+
+```text
+working
+cleanup two
+cleanup one
+done
+working
+cleanup two
+cleanup one
+failed
+round 0
+end of round 0
+round 1
+end of round 1
+```
+
+A deferred body cannot itself `return`, `?`, `break`, `continue` or `become`, and it cannot produce a result. A [stop](./errors) ends the program without running deferred statements.
+
 To check that a program releases everything it allocates, run or build it with `--leak-check`. If memory is still allocated when the program ends, it reports `leaked N allocation(s)` and exits with status 3.
 
 ## Boxes
