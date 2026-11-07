@@ -1,6 +1,6 @@
 ---
 title: Standard library
-description: What comes with Pelago: the always-available core and the std modules you import.
+description: "What comes with Pelago: the always-available core and the std modules you import."
 ---
 
 The library has two parts.

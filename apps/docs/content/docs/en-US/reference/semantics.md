@@ -1,6 +1,6 @@
 ---
 title: Semantics
-description: What programs mean: values, moves, evaluation, faults and cleanup.
+description: "What programs mean: values, moves, evaluation, faults and cleanup."
 ---
 
 ## Values

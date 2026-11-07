@@ -1,6 +1,6 @@
 ---
 title: std.os
-description: The process: arguments and exit status.
+description: "The process: arguments and exit status."
 ---
 
 ```text
