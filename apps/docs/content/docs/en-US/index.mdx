@@ -1,31 +1,33 @@
 ---
 title: Pelago documentation
-description: Design documents, compiler notes and the roadmap for Pelago, a self-hosting systems language.
+description: Learn Pelago, a compiled systems language with value semantics, no garbage collector and no runtime.
 ---
 
-Pelago is a self-hosting systems language: native code, no garbage collector, no runtime. These pages are the design documents that live next to the compiler in [`pelagolang/pelago`](https://github.com/pelagolang/pelago). The files there are the source of truth; this site is a readable copy of them.
+Pelago is a compiled systems language. Programs become native executables, memory is managed without a garbage collector, and the language has no runtime to ship alongside your code. Values behave like values, errors are ordinary results, and integer overflow stops the program instead of wrapping silently.
+
+```
+fn main() {
+    print("Hello, Pelago")
+}
+```
 
 <Cards>
-  <Card title="Language" href="./language/basics">
-    Variables, functions, types, `switch`, collections, errors, concurrency, memory and modules.
+  <Card title="Getting started" href="./getting-started/install">
+    Install the `pelago` tool, write a program, run it and build an executable.
   </Card>
-  <Card title="Compiler" href="./compiler/lexer">
-    The lexer, parser, checker, IR and native backend.
+  <Card title="Editor setup" href="./getting-started/editors">
+    Highlighting and live diagnostics in VS Code, Zed and any editor with Tree-sitter.
   </Card>
-  <Card title="Roadmap" href="./project/roadmap">
-    The vision, the decisions table and the phases.
-  </Card>
-  <Card title="Where we stopped" href="./project/next">
-    What is done and what comes next.
+  <Card title="Troubleshooting" href="./getting-started/troubleshooting">
+    Fixes for the problems people hit first.
   </Card>
 </Cards>
 
-## Status
+## What you can expect
 
-The stage 0 compiler, written in Rust with no dependencies, handles the whole language. It checks types and value semantics, runs programs in an IR interpreter and builds native executables for Linux and Windows. These documents are design drafts: each ends with the decisions that were made, and some pages are older than the code, so when they disagree the compiler and the [decisions table](/docs/project/roadmap) win.
+- **One tool.** `pelago` checks, runs, builds, formats and serves editors.
+- **Native output.** Executables for Linux and Windows on x86-64 and AArch64, with no linker and no C library involved.
+- **Predictable behaviour.** No exceptions, no null, and exhaustive `switch`. Overflow, out-of-range indexes and similar faults stop the program with a message.
+- **Small programs.** A hello-world executable is a few kilobytes.
 
-## Start here
-
-- **New to Pelago?** The [language tour](https://github.com/pelagolang/pelago/blob/main/examples/tour.pel) shows every syntax form, and [examples/programs](https://github.com/pelagolang/pelago/tree/main/examples/programs) holds programs that run.
-- **Want to build it?** Clone the repository and run `cargo build --release`; the README has the commands.
-- **Want to contribute?** Read [Commits and PR titles](/docs/project/commits) and [PR scenarios](/docs/project/pr-scenarios).
+The guide, reference and standard library sections are being written; this site grows page by page and every code sample on it is compiled before it is published.

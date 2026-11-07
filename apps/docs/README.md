@@ -13,13 +13,9 @@ Node 22 or later. The same commands work in PowerShell.
 
 ## Content
 
-Pages are in `content/docs/<language>/`; `meta.json` files order them. The three sections (`language/`, `compiler/`, `project/`) are root folders, so they show as tabs and the sidebar shows only the open one. `index.mdx` is hand-written. The pages under the sections are **copies** of the design documents in [`pelagolang/pelago`](https://github.com/pelagolang/pelago), which stay the source of truth. Do not edit the copies; change the file in the compiler repository, then refresh:
+Pages are in `content/docs/<language>/`; `meta.json` files order them. Each section (for example `getting-started/`) is a root folder, so it shows as a tab and the sidebar shows only the open one. `index.mdx` is the landing page.
 
-```
-node scripts/sync-docs.mjs ..\..\..\pelago     # path to a checkout of pelagolang/pelago
-```
-
-The script adds the frontmatter, rewrites links between documents and to repository files, and writes `.md` files (not `.mdx`) so braces and angle brackets in the text are never read as JSX. To add a page, add a line to the `pages` list in the script.
+The docs are written here, for readers of the language: guides, reference and tools. They are not a mirror of the compiler repository's design notes, and internal material (decision logs, plans, compiler internals) does not belong on this site. Every code sample must compile; check it with `pelago run` (or `pelago check`) before committing. Pages are `.md` where no components are needed, so braces and angle brackets are never read as JSX.
 
 ## Changelog
 
@@ -27,13 +23,13 @@ The script adds the frontmatter, rewrites links between documents and to reposit
 
 ## Languages
 
-`lib/i18n.ts` lists the languages: US English (default), UK English, Spanish, Chinese (zh-CN), Russian, Arabic (right to left), French and German. Each has a folder in `content/docs/` with the same layout (`index.mdx`, `meta.json`, `language/`, `compiler/`, `project/`). Every language has its own prefix: `/en-US/docs/...`, `/es/docs/...`.
+`lib/i18n.ts` lists the languages: US English (default), UK English, Spanish, Chinese (zh-CN), Russian, Arabic (right to left), French and German. Each has a folder in `content/docs/` with the same layout (`index.mdx`, `meta.json` and the section folders). Every language has its own prefix: `/en-US/docs/...`, `/es/docs/...`.
 
-A page missing in a language falls back to US English, so a language is translated page by page: copy the page from `en-US/` into the language folder at the same path and translate it (keep the frontmatter keys). To translate a section title, edit that folder's `meta.json` (`title`, `description`). UI text (search, table of contents, buttons) is in `lib/layout.shared.tsx`; `zh-CN` uses the official language pack, the others cover the visible strings and fall back to English for the rest. Pages translated by hand are not touched by the sync script, which only writes `en-US/`.
+A page missing in a language falls back to US English, so a language is translated page by page: copy the page from `en-US/` into the language folder at the same path and translate it (keep the frontmatter keys). To translate a section title, edit that folder's `meta.json` (`title`, `description`). UI text (search, table of contents, buttons) is in `lib/layout.shared.tsx`; `zh-CN` uses the official language pack, the others cover the visible strings and fall back to English for the rest.
 
 ### Keeping translations in step
 
-No translation API is used. `node scripts/translations.mjs status` lists the pages that are missing or stale in each language (a page is stale when its English source changed since it was translated); `prepare`, `check` and `record` cover translating one page, validating it and marking it current. Rules for translators are in [`TRANSLATING.md`](TRANSLATING.md). The sync script and the translations land in the same pull request, so the languages never lag behind the source for long.
+No translation API is used. `node scripts/translations.mjs status` lists the pages that are missing or stale in each language (a page is stale when its English source changed since it was translated); `prepare`, `check` and `record` cover translating one page, validating it and marking it current. Rules for translators are in [`TRANSLATING.md`](TRANSLATING.md).
 
 ## Versions
 

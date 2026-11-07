@@ -1,0 +1,6 @@
+{
+  "title": "Getting started",
+  "description": "Install Pelago and run your first program",
+  "root": true,
+  "pages": ["install", "hello-world", "run-and-build", "editors", "troubleshooting"]
+}
