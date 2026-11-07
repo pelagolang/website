@@ -35,25 +35,38 @@ function code(name, { run = true } = {}) {
   return s + "</figure>";
 }
 
+// Run times: one row per program, the three bars scaled to that row's slowest, so the bars show the ratio.
+// Programs that run in under 2 ms are start-up noise (marked, and left out of the means).
 function bench() {
   const data = JSON.parse(read("content", "bench.json"));
-  const max = Math.max(...data.rows.map((r) => Math.max(r.pelago, r.c_o2, r.rust)));
-  const f = (x) => x.toFixed(3);
+  const f = (x) => (x < 0.01 ? x.toFixed(4) : x.toFixed(3));
   const r = (x) => `${x.toFixed(2)}×`;
   const rows = data.rows
     .map((row) => {
+      const max = Math.max(row.pelago, row.c_o2, row.rust);
       const bar = (v, cls) => `<span class="bar ${cls}" style="width:${((v / max) * 100).toFixed(1)}%"></span>`;
-      const win = row.ratio_o2 <= 1 ? "win" : "lose";
-      return `<tr><th scope="row">${row.name}</th><td class="bars"><span class="bar-row">${bar(row.pelago, "p")}<i>${f(row.pelago)}</i></span><span class="bar-row">${bar(row.c_o2, "c")}<i>${f(row.c_o2)}</i></span><span class="bar-row">${bar(row.rust, "r")}<i>${f(row.rust)}</i></span></td><td class="num ${win}">${r(row.ratio_o2)}</td><td class="num ${row.ratio_rust <= 1 ? "win" : "lose"}">${r(row.ratio_rust)}</td></tr>`;
+      const cell = (ratio) => `<td class="num ${row.startup ? "" : ratio <= 1 ? "win" : "lose"}">${r(ratio)}</td>`;
+      const mark = row.startup ? ' <abbr title="runs in under 2 ms: start-up noise, left out of the means">†</abbr>' : "";
+      return `<tr><th scope="row">${row.name}${mark}</th><td class="bars"><span class="bar-row">${bar(row.pelago, "p")}<i>${f(row.pelago)}</i></span><span class="bar-row">${bar(row.c_o2, "c")}<i>${f(row.c_o2)}</i></span><span class="bar-row">${bar(row.rust, "r")}<i>${f(row.rust)}</i></span></td>${cell(row.ratio_o2)}${cell(row.ratio_rust)}</tr>`;
     })
     .join("");
-  return `<div class="table-wrap"><table class="bench"><thead><tr><th>program</th><th>seconds, best of ${data.runs} <span class="legend"><b class="p"></b>Pelago <b class="c"></b>C -O2 <b class="r"></b>Rust -O</span></th><th>vs C -O2</th><th>vs Rust</th></tr></thead><tbody>${rows}</tbody><tfoot><tr><th scope="row">geometric mean</th><td></td><td class="num">${r(data.geomean_c)}</td><td class="num">${r(data.geomean_rust)}</td></tr></tfoot></table></div>`;
+  return `<div class="table-wrap"><table class="bench"><thead><tr><th>program</th><th>seconds, median of at least ${data.runs} <span class="legend"><b class="p"></b>Pelago <b class="c"></b>C -O2 <b class="r"></b>Rust -O</span></th><th>vs C -O2</th><th>vs Rust</th></tr></thead><tbody>${rows}</tbody><tfoot><tr><th scope="row">geometric mean of ${data.mean_n}</th><td></td><td class="num">${r(data.geomean_c)}</td><td class="num">${r(data.geomean_rust)}</td></tr></tfoot></table></div>`;
+}
+
+// Binary sizes in KiB, as measured by the same run.
+function benchSizes() {
+  const data = JSON.parse(read("content", "bench.json"));
+  const rows = data.rows
+    .map((row) => `<tr><th scope="row">${row.name}</th><td class="num">${row.kib_pelago}</td><td class="num">${row.kib_tcc}</td><td class="num">${row.kib_gcc}</td><td class="num">${row.kib_rust.toLocaleString("en-US")}</td></tr>`)
+    .join("");
+  return `<div class="table-wrap"><table class="bench"><thead><tr><th>program</th><th>Pelago</th><th>tcc</th><th>gcc -O2</th><th>rustc -O</th></tr></thead><tbody>${rows}</tbody></table></div>`;
 }
 
 function expand(text) {
   return text
     .replace(/\{\{code:([\w-]+)(?::(norun))?\}\}/g, (_, n, flag) => code(n, { run: flag !== "norun" }))
     .replace(/\{\{bench\}\}/g, bench)
+    .replace(/\{\{bench-sizes\}\}/g, benchSizes)
     .replace(/\{\{bench:(\w+)\}\}/g, (_, k) => String(JSON.parse(read("content", "bench.json"))[k]));
 }
 
