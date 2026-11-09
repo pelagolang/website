@@ -36,7 +36,7 @@ A plain `//` or `/* */` is a syntax error, and the message tells you which form 
 
 ## Formatting
 
-`pelago fmt` rewrites files into the standard layout, so teams do not argue about it. `pelago fmt --check` only reports files that would change, which suits continuous integration. Options can be set in the `[fmt]` section of `pelago.toml`.
+`pelago fmt` rewrites files into the standard layout, so teams do not argue about it. `pelago fmt --check` only reports files that would change, which suits continuous integration. Options can be set in the `fmt` section of `pelago.yaml`.
 
 ## Naming
 
