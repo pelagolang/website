@@ -34,4 +34,4 @@ pelago fmt --check src
 
 ## Settings
 
-The indentation width comes from the `[fmt]` section of [`pelago.toml`](./pelago-toml). The language server formats through the same code, so "format document" in an editor gives the same result as the command.
+The indentation width comes from the `fmt` section of [`pelago.yaml`](./pelago-yaml). The language server formats through the same code, so "format document" in an editor gives the same result as the command.
