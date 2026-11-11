@@ -28,8 +28,8 @@ export default async function Page(props: PageProps<'/[lang]/docs/[[...slug]]'>)
     <DocsPage
       toc={page.data.toc}
       full={page.data.full}
-      tableOfContent={{ header: status ? <StatusBadge status={status} className="mb-3" /> : undefined }}
-      tableOfContentPopover={{ header: status ? <StatusBadge status={status} className="mb-3" /> : undefined }}
+      tableOfContent={{ header: status ? <StatusBadge status={status} className="mb-3 w-fit" /> : undefined }}
+      tableOfContentPopover={{ header: status ? <StatusBadge status={status} className="mb-3 w-fit" /> : undefined }}
     >
       <DocsTitle>
         {page.data.title}
