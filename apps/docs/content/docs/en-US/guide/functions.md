@@ -98,6 +98,32 @@ main:5:9: error: the argument `xs` is changed in place; write `inout ...` at the
 
 Methods follow the same idea with a mark on the method name: `list.push!(x)` changes the receiver and `task.join!!()` uses it up. See [Ownership](./ownership).
 
+## Short spellings
+
+`inout` and `sink` can also be written as a mark right after the name: `x!` means `inout x` and `x!!` means `sink x`. One bang changes, two bangs consume, the same rule as the method marks `xs.push!(1)` and `task.join!!()`. The words and the marks mean exactly the same, and `pelago fmt` keeps whichever you wrote.
+
+```pelago
+fn bump(n!: int) { n += 1 }
+
+fn count(xs!!: [int]) -> int = xs.len()
+
+fn main() {
+    var n = 1
+    bump(n!)
+    print("#n")
+
+    const xs = [1, 2, 3]
+    print("#(count(xs!!))")
+}
+```
+
+```text
+2
+3
+```
+
+The marks work wherever a mode does: parameters, arguments, `for x! of xs`, `switch xs! { }`, patterns and closure captures such as `[total!, data!!] x ~> ...`. Writing both on one name (`inout x!`) is an error. They are not available inside function types, where `T!E` already means a result type; write `fn(inout int)` there.
+
 ## Closures
 
 A closure is written `parameters ~> body`. When it has a single parameter you may use the name `it`. A closure that changes a variable of the surrounding function lists it in square brackets with the mode.

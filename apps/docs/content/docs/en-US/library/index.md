@@ -12,6 +12,8 @@ The library has two parts.
 | Module | Purpose |
 | --- | --- |
 | [`std.io`](./io) | Standard input and standard error. |
+| [`std.fs`](./fs) | Read and write files by path. |
+| [`std.path`](./path) | Join, split and clean paths as text. |
 | [`std.os`](./os) | The process: arguments and exit status. |
 | [`std.json`](./json) | Parse and write JSON. |
 | [`std.regex`](./regex) | Regular expressions. |

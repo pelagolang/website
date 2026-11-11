@@ -2,5 +2,5 @@
   "title": "Tools",
   "description": "The pelago command, its configuration, formatter and language server",
   "root": true,
-  "pages": ["cli", "targets", "pelago-yaml", "formatter", "language-server"]
+  "pages": ["cli", "targets", "pelago-yaml", "islet", "formatter", "language-server"]
 }

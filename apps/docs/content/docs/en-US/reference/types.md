@@ -28,6 +28,7 @@ Arithmetic on every integer type is checked: a result that does not fit stops th
 | Type | Example | Meaning |
 | --- | --- | --- |
 | Tuple | `(int, string)` | A fixed group of values; fields are `t.0`, `t.1`. |
+| Braid | `(int, string; 4)` | A fixed-size run whose types repeat in a cycle. See [Braids](../guide/braids). |
 | List | `[int]` or `list<int>` | A growable sequence. |
 | Map | `map<string, int>` | Keys with values. |
 | Set | `set<int>` | Unique values. |
