@@ -24,6 +24,13 @@ A list is written `[T]` (or `list<T>`) with a literal such as `[1, 2, 3]`. See [
 | `reverse!()` | | Reverse in place. |
 | `reversed()` | `[T]` | A reversed copy. |
 | `swap!(a, b)` | | Exchange two elements. |
+| `indexOf(x)` | `int?` | The position of the first element equal to `x`. |
+| `binarySearch(x)` | `int?` | The position of `x` in a sorted list. |
+| `dedup!()` | | Remove repeated neighbours: `[1, 1, 2, 1]` becomes `[1, 2, 1]`. |
+| `retain!(f)` | | Keep only the elements for which `f` holds. |
+| `truncate!(n)` | | Keep the first `n` elements; a larger `n` changes nothing. |
+| `sortBy!(f)` | | Sort with a comparison `f(a, b)` that returns a negative, zero or positive int. |
+| `chunks(n)` | `iter<[T]>` | Pieces of `n` elements; the last may be shorter. |
 | `toList()` | `[T]` | A copy. |
 | `map(f)`, `filter(f)` | `iter<T>` | Lazy; follow with `toList()` or `sum()`. |
 | `each(f)` | | Call `f` for each element. |
@@ -48,6 +55,31 @@ fn main() {
 [12, 10, 8, 5, 3, 1]
 [8, 10, 12]
 78
+```
+
+```pelago
+fn main() {
+    const xs = [4, 8, 15, 16, 23, 42]
+    print(xs.indexOf(15), xs.indexOf(5), xs.binarySearch(23), xs.binarySearch(24))
+    var d = [1, 1, 2, 2, 2, 1, 3, 3]
+    d.dedup!()
+    print(d)
+    var r = [1, 2, 3, 4, 5, 6]
+    r.retain!(x ~> x % 2 == 0)
+    print(r)
+    var w = ["pear", "fig", "apple", "kiwi"]
+    w.sortBy!((a, b) ~> a.len() - b.len())
+    print(w)
+    print([1, 2, 3, 4, 5].chunks(2).toList())
+}
+```
+
+```text
+some(2) none some(4) none
+[1, 2, 1, 3]
+[2, 4, 6]
+["fig", "pear", "kiwi", "apple"]
+[[1, 2], [3, 4], [5]]
 ```
 
 ## Iterators

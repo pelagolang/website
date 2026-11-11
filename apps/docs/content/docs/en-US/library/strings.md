@@ -19,6 +19,14 @@ description: Methods of string, str and char.
 | `startsWith(p)`, `endsWith(p)` | `bool` | |
 | `split(sep)` | `iter<str>` | |
 | `trim()` | `str` | Without surrounding white space. |
+| `trimStart()`, `trimEnd()` | `str` | Trim one side only. |
+| `find(part)`, `findLast(part)` | `int?` | The byte position of the first or last match. |
+| `charCount()` | `int` | The number of characters (`len()` counts bytes). |
+| `stripPrefix(p)`, `stripSuffix(p)` | `str?` | The rest when the text starts or ends with `p`; `none` otherwise. |
+| `splitOnce(sep)` | `(str, str)?` | Split at the first `sep`. |
+| `lines()` | `iter<str>` | Lines, without `\n` or `\r\n`. |
+| `repeat(n)` | `string` | The text `n` times. |
+| `padLeft(width, c)`, `padRight(width, c)` | `string` | Fill with `c` up to `width` characters; longer text is unchanged. |
 | `toUpper()`, `toLower()` | `string` | |
 | `replace(from, to)` | `string` | Every occurrence. |
 | `parseInt()` | `int ! parse_error` | |
@@ -78,4 +86,29 @@ fn main() {
 
 ```text
 3 Q
+```
+
+`join(separator)` works on a list of strings and on an iterator of strings.
+
+```pelago
+fn main() {
+    const s = "hello, wörld, hello"
+    print(s.find("hello"), s.find("xyz"), s.findLast("hello"))
+    print(s.len(), s.charCount())
+    print("key=value=x".stripPrefix("key="), "file.pel".stripSuffix(".rs"))
+    print("a=b=c".splitOnce("="))
+    print("a\nb\r\nc\n".lines().toList())
+    print("7".padLeft(3, '0'), "7".padRight(3, '-'), "ab".repeat(3))
+    print(["a", "b", "c"].join(", "), "x y z".split(" ").join("+"))
+}
+```
+
+```text
+some(0) none some(15)
+20 19
+some("value=x") none
+some(("a", "b=c"))
+["a", "b", "c"]
+007 7-- ababab
+a, b, c x+y+z
 ```
