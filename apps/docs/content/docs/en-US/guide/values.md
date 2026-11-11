@@ -122,6 +122,8 @@ fn main() {
 1 two
 ```
 
+When the types should take turns in a fixed-size run, such as `(int, string; 4)`, use a [braid](./braids).
+
 ## Conditions
 
 `if` is an expression, so it can produce a value. The conditional operator `? :` is the short form. `unless` is `if` with the condition reversed.

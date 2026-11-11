@@ -11,7 +11,13 @@ import std.regex
 
 ## Syntax
 
-Literals, `.`, classes (`[a-z]`, `[^...]`), the escapes `\d \D \w \W \s \S \b \B`, anchors `^` and `$`, groups `( )` and `(?: )`, alternation `|`, repetition `* + ?`, `{n}`, `{n,}`, `{n,m}` and the lazy forms such as `*?`. Flags like `(?i)` are not supported. Matching works on bytes, so `.` and classes see UTF-8 text one byte at a time.
+Literals, `.`, classes (`[a-z]`, `[^...]`), the escapes `\d \D \w \W \s \S \b \B`, the anchors `^`, `$`, `\A` (start of text) and `\z` (end of text), groups `( )` and `(?: )`, named groups `(?<name>...)` or `(?P<name>...)`, alternation `|`, repetition `* + ?`, `{n}`, `{n,}`, `{n,m}` and the lazy forms such as `*?`.
+
+Flags are switched on for the rest of the group: `(?i)` ignores case, `(?s)` lets `.` match a newline, `(?m)` lets `^` and `$` match at every line.
+
+Lookahead `(?=...)` and `(?!...)` is supported and stays linear: each lookahead body is run once over the whole text, backwards, instead of once per position. Lookbehind is refused with a parse error.
+
+Matching works on bytes, so `.` and classes see UTF-8 text one byte at a time.
 
 ## Methods
 
@@ -48,3 +54,72 @@ true 2
 <ab> <c>
 1..4 aa
 ```
+
+## Backreferences
+
+`\1` to `\99`, `\k<name>` and `(?P=name)` repeat what an earlier group matched. A reference to a group that did not take part fails to match, and a group must be closed before it is referenced. A backreference cannot be done in time proportional to the text, so `regex.compile` refuses such a pattern. Use `regex.compileWithBackrefs`, and run it with a budget, a number of steps after which the search gives up:
+
+| Method | Result |
+| --- | --- |
+| `search(text, budget)` | `matched(found)`, `nomatch` or `gaveUp`. |
+| `searchAll(text, budget)` | `[found]?`, `none` when the budget ran out. |
+
+```pelago
+import std.regex
+
+fn main() {
+    switch regex.compileWithBackrefs("(\\w+) \\1") {
+        case ok(re):
+            switch re.search("it is is a test", 100000) {
+                case .matched(m): print("matched #(m.start)..#(m.end)")
+                case .nomatch: print("no match")
+                case .gaveUp: print("gave up")
+            }
+        case err(e): print("bad pattern: #(e.message)")
+    }
+}
+```
+
+```text
+matched 3..8
+```
+
+A backreference inside a lookahead, or into one, is a compile error. This is a deliberate difference from Python.
+
+## Patterns checked by the compiler
+
+An attribute on a struct compiles the pattern while your program is compiled. Each named group becomes a field, and a pattern that does not fit its fields is a compile error: a missing group, a group that may not take part but whose field is not optional (`T?`), or a digit group that can be longer than the number type allows. The generated matcher is plain code with fixed-size tables and no growable lists, so it needs no allocation to match.
+
+```pelago
+import std.regex
+
+@regex("(?<year>\\d{4})-(?<month>\\d\\d)(-(?<day>\\d\\d))?")
+struct date {
+    year: uint16
+    month: uint8
+    day: uint8?
+}
+
+fn main() {
+    switch dateFind("on 2026-11-10 and 1999-01") {
+        case some(d): print(d.year, d.month, d.day)
+        case none: print("none")
+    }
+    print(dateIsMatch("no date"), dateIsMatch("1999-01"))
+    for d of dateFindAll("2026-11-10, 1999-01 and 2000-02-29") {
+        print(d.year, d.month, d.day)
+    }
+}
+```
+
+```text
+2026 11 some(10)
+false true
+2026 11 some(10)
+1999 1 none
+2000 2 some(29)
+```
+
+For a struct named `date` the functions are `dateFind`, `dateFindAll` and `dateIsMatch`. Fields are read as text, as numbers (`uint8`, `int`, ...) or as an option of either. When a number can have more digits than its type holds, the pattern is a compile error if every digit count is possible, and otherwise a text that does not fit is a failed match.
+
+A pattern with a backreference is turned into plain alternatives when the referenced group always takes part, is not in a loop and can only match a short fixed set of strings, such as a quote character. Otherwise the generated functions take the budget as an extra argument and return `matched`, `nomatch` or `gaveUp`, like `search`.

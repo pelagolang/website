@@ -52,7 +52,48 @@ fn main() {
 
 ## Iterators
 
-`map` and `filter` return an `iter<T>`. An iterator can be walked with `for`, collected with `toList()` or `toSet()`, counted with `count()`, and asked for its `first()`. Iterators of numbers have `sum()`.
+`xs.iter()` gives an `iter<T>`, and `map` and `filter` return one too. An iterator can be walked with `for`, collected with `toList()` or `toSet()`, counted with `count()`, and asked for its `first()`. Iterators of numbers have `sum()`.
+
+| Method | Result | Notes |
+| --- | --- | --- |
+| `map(f)`, `filter(f)` | `iter<U>`, `iter<T>` | Transform or keep elements. |
+| `filterMap(f)`, `flatMap(f)` | `iter<U>` | `f` returns an option or an iterator; `none` drops the element. |
+| `take(n)`, `skip(n)` | `iter<T>` | The first `n` elements, or all but the first `n`. |
+| `takeWhile(f)`, `skipWhile(f)` | `iter<T>` | While `f` holds. |
+| `chain(other)` | `iter<T>` | This iterator, then `other`. |
+| `zip(other)` | `iter<(T, U)>` | Pairs, ending with the shorter one. |
+| `enumerate()` | `iter<(int, T)>` | Each element with its position. |
+| `reversed()` | `iter<T>` | Back to front. |
+| `fold(init, f)` | `U` | Combine all elements, starting from `init`. |
+| `any(f)`, `all(f)` | `bool` | Does `f` hold for some, or for every, element? |
+| `find(f)` | `T?` | The first element for which `f` holds. |
+| `position(f)` | `int?` | The index of that element. |
+| `nth(n)`, `last()` | `T?` | The element at `n` (from 0), or the final one. |
+| `min()`, `max()` | `T?` | The smallest or largest; `none` when empty. |
+| `each(f)` | | Call `f` for each element. |
+
+```pelago
+fn main() {
+    const xs = [3, 1, 4, 1, 5, 9, 2, 6]
+    print(xs.iter().fold(0, (a, x) ~> a + x))
+    print(xs.iter().any(x ~> x > 8), xs.iter().all(x ~> x > 1))
+    print(xs.iter().find(x ~> x > 4), xs.iter().position(x ~> x == 4))
+    print(xs.iter().take(3).toList(), xs.iter().skip(5).toList())
+    print(xs.iter().take(2).enumerate().toList())
+    print(xs.iter().take(3).zip(["a", "b"].iter()).toList())
+    print(xs.iter().min(), xs.iter().max())
+}
+```
+
+```text
+31
+true false
+some(5) some(2)
+[3, 1, 4] [9, 2, 6]
+[(0, 3), (1, 1)]
+[(3, "a"), (1, "b")]
+some(1) some(9)
+```
 
 Lists of strings have `join(separator)`, which returns one string.
 

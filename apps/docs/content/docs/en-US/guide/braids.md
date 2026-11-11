@@ -1,0 +1,129 @@
+---
+title: Braids
+description: A fixed-size run of values whose types take turns, such as (int, string; 4).
+---
+
+A braid is a fixed number of slots whose types repeat in a cycle. `(int, string; 4)` is an int, a string, an int and a string, in that order. The number after the `;` is the length in slots and must be known when the program is compiled. Pelago is the only language with this as a built-in type: it is the shape of an opcode followed by an operand, a key followed by a value, or a coordinate followed by an id.
+
+A braid is a value, like an array: assigning copies it (or moves it when it owns memory), `copy` makes an independent duplicate, and `==`, `<`, hashing and printing work slot by slot.
+
+## Writing one
+
+The type decides. A parenthesised list where a braid is expected is a braid; anywhere else it is an ordinary tuple. `braid<int, string; 4>` is another spelling of `(int, string; 4)`, and the formatter keeps the one you wrote.
+
+```pelago
+fn main() {
+    const t: (int, string; 3) = (7, "seven", 8)
+    const plain = (7, "seven", 8)
+    const w: braid<int, string; 4> = (1, "a", 2, "b")
+    const z: (int, string; 6) = (0, ""; 6)
+    print(t, plain, w, z)
+}
+```
+
+```text
+(7, "seven", 8) (7, "seven", 8) (1, "a", 2, "b") (0, "", 0, "", 0, "")
+```
+
+The count and the type of every item are checked, and the error names the slot. `(0, ""; 6)` repeats the cycle up to six slots, the way `[0; 6]` repeats one value. A cycle can have more than two types: `(int, string, bool; 6)`. The length can be a calculation, as in `braid<int, string; (2 * 3)>`.
+
+## Reading slots
+
+A slot's type depends on its position, so a position the compiler cannot see has no type. A constant position has the type of its slot, and a position past the end is a compile error.
+
+```pelago
+fn main() {
+    const o: (int, string; 5) = (7, "seven", 8, "eight", 9)
+    print(o[0], o[1], o.2)
+    print(o.len(), o.pairs(), o.first(0), o.second(1), o.tail())
+    print(o.first(-1), o.second(-2))
+}
+```
+
+```text
+7 seven 8
+5 2 7 eight 9
+8 seven
+```
+
+`first(p)` and `second(p)` read pair number `p`, and a negative `p` counts from the end. A pair outside the braid stops the program with `pair 2 out of range: 2 pairs`. `tail()` is the last slot of a braid with an odd length and is a compile error for an even one. `setFirst!(p, v)` and `setSecond!(p, v)` change a slot.
+
+A run-time `x[i]` is an error when the slot types differ. A braid whose cycle has one type, such as `(int, int; 4)`, accepts it, checked like an array index.
+
+## Pairs and strands
+
+```pelago
+fn main() {
+    const o: (int, string; 5) = (7, "seven", 8, "eight", 9)
+    for (a, b) of o.pairIter() { print(a, b) }
+
+    const (nums, names) = o.split()
+    print(nums, names)
+
+    const f: (int, string; 4) = (1, "a", 2, "b")
+    print(f.swap())
+    print(f.mapPairs((a, b) ~> (a * 2, b + b)))
+
+    const zipped = braid.zip([1, 2, 3], [4.5, 5.5, 6.5])
+    print(zipped)
+}
+```
+
+```text
+7 seven
+8 eight
+[7, 8, 9] ["seven", "eight"]
+("a", 1, "b", 2)
+(2, "aa", 4, "bb")
+(1, 4.5, 2, 5.5, 3, 6.5)
+```
+
+| Method | Result |
+| --- | --- |
+| `pairIter()` | The full pairs, for `for (a, b) of ...`. |
+| `split()` or `unbraid()` | Two lists, one per type: copies. |
+| `evens()`, `odds()` | The slots of one type, as an iterator of copies. `strands()` gives both. |
+| `mapPairs(f)`, `mapEvens(f)`, `mapOdds(f)` | A new braid. |
+| `swap()` | The roles of the two types exchanged (even length only). |
+| `braid.zip(as, bs)` | A braid from two lists of equal length. |
+| `braid.fromLists(as, bs)` | The same, as a `result`; unequal lists are a `zip_error`. |
+| `toArray()` | An array, when all slots have one type. |
+| `asPairs()`, `asSlots()` | Convert between `(A, B; 2N)` and `[(A, B); N]` (copies). |
+
+For a cycle of three types the methods are `first`, `second` and `third`, with `rounds` and `asRounds` in place of `pairs` and `asPairs`.
+
+## Strand views
+
+`firstStrand()` and `secondStrand()` give a read-only view of every other slot, without copying. `for x of strand` walks it in place, and a strand also has `len`, `at`, `iter` and `toList`. To change slots, call `firstStrandMut!()` or `secondStrandMut!()` on a braid you may change; the result has `set(i, v)` and works with `for inout`.
+
+```pelago
+fn main() {
+    var b: (int, string; 5) = (1, "a", 2, "b", 3)
+    const s = b.secondStrandMut!()
+    s.set(0, "A")
+    s.set(-1, "B")
+    for inout x of b.firstStrandMut!() { x += 100 }
+    print(b)
+    for x of b.secondStrand() { print(x) }
+}
+```
+
+```text
+(101, "A", 102, "B", 103)
+A
+B
+```
+
+## Braid or array of pairs
+
+`[(A, B); N]` is an array of `N` pairs. It uses exactly the memory of `(A, B; 2N)`, but it is a different type: you reach its items as pairs. Use a braid when the two values are read together; use two separate lists when one kind is scanned alone.
+
+A braid is laid out slot by slot in the order written, each at its natural alignment, so `(uint8, uint16; 6)` has padding between its slots. Equal-sized types in the cycle avoid it.
+
+## JSON
+
+With `@derive(fromJson)` and `@derive(toJson)`, a braid is one flat JSON array with one element per slot: `(int, string; 3)` is `[7, "seven", 8]`. An array of pairs, `[(int, string); 2]`, is an array of two-element arrays. Decoding checks the count: `$: expected 3 elements, found 4`. See [std.json](../library/json).
+
+## Not available yet
+
+Cycles of four or more types have the type, literals and slot access but not the pair methods. There is no check yet against using a braid while a mutable strand of it is alive, so do not read the braid and write through a strand in the same statement.

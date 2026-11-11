@@ -99,4 +99,61 @@ fn main() {
 
 Each task changes a different variable, and the compiler rejects a scope in which two tasks would change the same one.
 
+## Stopping tasks
+
+Stopping is cooperative: nothing interrupts a task and nothing unwinds. `t.cancel()` asks a task to stop, and the task sees `cancelled()` become true; `s.cancel()` does the same for every task of a scope, including ones started afterwards. A task that wants to stop early looks at `cancelled()` between steps. A cancelled task still has to be joined (or dropped) as usual. `yield_now()` lets other tasks run.
+
+```pelago
+fn main() {
+    const t = spawn(() ~> {
+        var n = 0
+        while !cancelled() {
+            n += 1
+            yield_now()
+        }
+        n > 0
+    })
+    yield_now()
+    t.cancel()
+    print(t.join!!())
+}
+```
+
+```text
+true
+```
+
+A `select` can wait for a channel and for cancellation at once: the arm `case cancelled()` runs when the running task or its scope is cancelled.
+
+```pelago
+fn main() {
+    const (tx, rx) = chan<int>()
+    scope s {
+        s.spawn([sink rx] () ~> {
+            select {
+                case v = rx.recv() { print("got") }
+                case cancelled() { print("cancelled") }
+            }
+        })
+        yield_now()
+        yield_now()
+        s.cancel()
+    }
+    print("end")
+}
+```
+
+```text
+cancelled
+end
+```
+
+## Ending the program
+
+Returning from `main` ends the program. A task that was started with a plain `spawn` and never joined is abandoned at that point: it does not keep running after `main`. Join what you need, or start it inside a `scope`, which always waits.
+
+## Stacks
+
+Every task, and every coroutine, runs on its own stack of 256 KiB, taken from a pool and reused. A page that cannot be accessed sits below each stack, so a task that recurses too deeply stops the program instead of overwriting other memory.
+
 Running tasks on real parallel threads and suspending `async` functions are still being completed, so this page sticks to what works today.
