@@ -3,6 +3,10 @@ title: Braids
 description: A fixed-size run of values whose types take turns, such as (int, string; 4).
 ---
 
+<Callout type="warn" title="Experimental">
+Braids are new and may change. Their performance benefit has not been measured yet: the layout is meant to keep two kinds of data that are read together in one run of memory, but nobody has benchmarked it against separate lists or an array of pairs. Use a braid for the shape of the data, not for speed, until there are numbers.
+</Callout>
+
 A braid is a fixed number of slots whose types repeat in a cycle. `(int, string; 4)` is an int, a string, an int and a string, in that order. The number after the `;` is the length in slots and must be known when the program is compiled. Pelago is the only language with this as a built-in type: it is the shape of an opcode followed by an operand, a key followed by a value, or a coordinate followed by an id.
 
 A braid is a value, like an array: assigning copies it (or moves it when it owns memory), `copy` makes an independent duplicate, and `==`, `<`, hashing and printing work slot by slot.
