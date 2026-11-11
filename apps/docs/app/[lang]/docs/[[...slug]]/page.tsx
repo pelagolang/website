@@ -11,6 +11,7 @@ import { notFound } from 'next/navigation';
 import { getMDXComponents } from '@/components/mdx';
 import type { Metadata } from 'next';
 import { createRelativeLink } from 'fumadocs-ui/mdx';
+import { StatusBadge } from '@/components/status-badge';
 import { basePath, getPageImageUrl, getPageMarkdownUrl } from '@/lib/shared';
 
 export default async function Page(props: PageProps<'/[lang]/docs/[[...slug]]'>) {
@@ -18,13 +19,22 @@ export default async function Page(props: PageProps<'/[lang]/docs/[[...slug]]'>)
   const page = source.getPage(params.slug, params.lang);
   if (!page) notFound();
 
+  const status = page.data.status;
   const MDX = page.data.body;
   const RelativeLink = createRelativeLink(source, page);
   const markdownUrl = `${basePath}${getPageMarkdownUrl(page).url}`;
 
   return (
-    <DocsPage toc={page.data.toc} full={page.data.full}>
-      <DocsTitle>{page.data.title}</DocsTitle>
+    <DocsPage
+      toc={page.data.toc}
+      full={page.data.full}
+      tableOfContent={{ header: status ? <StatusBadge status={status} className="mb-3" /> : undefined }}
+      tableOfContentPopover={{ header: status ? <StatusBadge status={status} className="mb-3" /> : undefined }}
+    >
+      <DocsTitle>
+        {page.data.title}
+        {status ? <StatusBadge status={status} className="ms-3 align-middle" /> : null}
+      </DocsTitle>
       <DocsDescription className="mb-0">{page.data.description}</DocsDescription>
       <div className="flex flex-row gap-2 items-center border-b pb-6">
         <MarkdownCopyButton markdownUrl={markdownUrl} />
