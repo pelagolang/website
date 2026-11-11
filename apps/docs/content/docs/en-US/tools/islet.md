@@ -1,6 +1,6 @@
 ---
 title: Islet
-description: The package manager for Pelago: a shared store, a lock file, signed packages and a transparency log.
+description: "The package manager for Pelago: a shared store, a lock file, signed packages and a transparency log."
 ---
 
 Islet is Pelago's package manager. Its command is `islet`, and it lives in its own repository, [pelagolang/islet](https://github.com/pelagolang/islet). Pelago has no general-purpose linker, so a package is source code that the compiler reads next to yours. `pelago` never runs Islet: Islet writes a map of the installed packages, and `pelago check`, `run` and `build` read it.
