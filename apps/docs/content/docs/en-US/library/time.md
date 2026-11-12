@@ -22,12 +22,28 @@ A `duration` is a length of time that carries its unit, so there is no bare `int
 | `asSecondsFloat()` | `float` | |
 | `abs()` | `duration` | |
 | `a + b`, `a - b`, `-a` | `duration` | Durations add and subtract. |
-| `a < b`, `a == b` | `bool` | Durations compare. |
+| `a == b`, `a != b`, `a < b`, `a <= b`, `a > b`, `a >= b` | `bool` | Durations compare. |
 | `instant.elapsed()` | `duration ! io_error` | The time since this instant. |
 | `instant.since(earlier)` | `duration` | The distance between two instants. |
 | `instant.plus(d)` | `instant` | |
 
-A duration prints with its unit.
+A duration prints with the largest unit that keeps the number readable: `1.5s`, `250ms`, `42us` or `7ns`. Milliseconds and microseconds are cut towards zero when printed (`1500ns` prints as `1us`), so use `asNanos()` when you need the exact number.
+
+```pelago
+import std.time
+
+fn main() {
+    const a = time.millis(5)
+    const b = time.seconds(1)
+    print(a <= b, a > b, a >= a, a != b)
+    print(time.nanos(1500).asNanos(), time.nanos(1500))
+}
+```
+
+```text
+true false true true
+1500 1us
+```
 
 ```pelago
 import std.time
@@ -59,3 +75,13 @@ The clocks work on Linux (x86-64 and AArch64) and on Windows (x86-64 and ARM64).
 `sleep` asks the kernel to pause when every task is waiting, so it costs no processor time on Linux. Windows has no sleep call yet: there `sleep` still waits correctly, but by checking the clock again and again, so it uses a processor while it waits.
 
 `select` can use a duration as a time limit: see [Concurrency](../guide/concurrency.md).
+
+## What is not there yet
+
+The module is small on purpose. These are missing today, so write them yourself where you need them:
+
+- **Dates and calendars.** `time.sinceEpoch()` gives seconds since 1970 as a `duration`, and nothing turns that into a year, month or day. There is no date type, no time zones, no formatting and no parsing.
+- **Scaling a duration.** `d * 2` and `d / 2` are compile errors, because `duration` has no multiplication or division. Build the length from the number instead, for example `time.millis(n * 5)`.
+- **Instants.** An `instant` has no `<`, `==` or `print`, and no `-`. Use `a.since(b)` and compare the resulting durations. A wall-clock reading is a `duration`, not an `instant`.
+- **Timers and deadlines.** There is no timer or ticker type. For a time limit use `select` with `case timeout(d)` (see [Concurrency](../guide/concurrency.md)).
+- **Targets.** There is no clock on macOS, and no sleep call on Windows (sleeping there waits by checking the clock).
