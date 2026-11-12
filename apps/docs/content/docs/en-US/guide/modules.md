@@ -85,7 +85,7 @@ A dependency installed by [Islet](../tools/islet.md) is imported by the package'
 
 ## The standard library
 
-The library has two parts. `core` is built in and always available: lists, maps, strings, numbers, results and options, tasks. `std` holds modules you import when needed: `std.io`, `std.fs`, `std.path`, `std.os`, `std.json`, `std.regex` and `std.big`.
+The library has two parts. `core` is built in and always available: lists, maps, strings, numbers, results and options, tasks. `std` holds modules you import when needed: `std.io`, `std.fs`, `std.path`, `std.time`, `std.env`, `std.os`, `std.json`, `std.regex` and `std.big`.
 
 ```pelago exit
 import std.os

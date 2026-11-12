@@ -61,4 +61,51 @@ fn main() {
 failed: notFound
 ```
 
+## Files and folders
+
+| Function | Result | Notes |
+| --- | --- | --- |
+| `fs.exists(path)` | `bool` | Whether the path exists. It never fails. |
+| `fs.metadata(path)` | `fs.file_info ! io_error` | A `size` in bytes and a `kind`: `fs.file_kind.file`, `dir` or `other`. A link is followed. |
+| `fs.createDir(path)` | `void ! io_error` | Make one folder. |
+| `fs.createDirs(path)` | `void ! io_error` | Make a folder and any missing parents. |
+| `fs.removeFile(path)` | `void ! io_error` | Delete a file. |
+| `fs.removeDir(path)` | `void ! io_error` | Delete an empty folder. |
+| `fs.rename(from, to)` | `void ! io_error` | Move or rename. |
+| `fs.readDir(path)` | `[string] ! io_error` | The names in a folder, sorted. |
+
+Folder operations run on the interpreter and on x86-64 Linux builds for now.
+
+```pelago
+import std.fs
+
+fn main() -> void ! io_error {
+    fs.createDirs("tmp-docs-demo/a/b")?
+    fs.writeText("tmp-docs-demo/a/one.txt", "hello")?
+    fs.writeText("tmp-docs-demo/a/two.txt", "hi")?
+    const here = fs.exists("tmp-docs-demo/a/one.txt")
+    const gone = fs.exists("tmp-docs-demo/nope")
+    print("#(here) #(gone)")
+    const info = fs.metadata("tmp-docs-demo/a/one.txt")?
+    print("#(info.size) #(info.kind == fs.file_kind.file)")
+    fs.rename("tmp-docs-demo/a/two.txt", "tmp-docs-demo/a/three.txt")?
+    for name in fs.readDir("tmp-docs-demo/a")? {
+        print(name)
+    }
+    fs.removeFile("tmp-docs-demo/a/one.txt")?
+    fs.removeFile("tmp-docs-demo/a/three.txt")?
+    fs.removeDir("tmp-docs-demo/a/b")?
+    fs.removeDir("tmp-docs-demo/a")?
+    fs.removeDir("tmp-docs-demo")?
+}
+```
+
+```text
+true false
+5 true
+b
+one.txt
+three.txt
+```
+
 Standard input has the same shape in [std.io](./io.md): `io.readLine()`, `io.readAll()` and `io.readBytes()` never stop the program on a read error, and `io.tryReadLine()` and `io.tryReadAll()` return the `io_error` instead.
