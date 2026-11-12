@@ -150,7 +150,7 @@ true
 
 ## Stops
 
-Some faults are bugs, not conditions to handle: integer overflow, an index out of range, a failed `assert`, a call to `panic`. The program prints a message, ends and exits with a non-zero status. There is no way to catch a stop, so when a caller may reasonably want to react, return a result instead.
+Some faults are bugs, not conditions to handle: integer overflow, an index out of range, a failed `assert`, a call to `panic`. The program prints a message that names the place, ends and exits with a non-zero status. The message reads `file:line: stopped: reason`, for example `main:3: stopped: panic`, where `file` is the source file and `line` the line of the check that failed. There is no way to catch a stop, so when a caller may reasonably want to react, return a result instead.
 
 ```pelago
 fn main() {
@@ -162,5 +162,7 @@ fn main() {
 ```text
 stopped: panic
 ```
+
+The sample above is shown without its place so that it reads the same wherever you run it; the real line begins with the file and line.
 
 Use `assert(condition)` for conditions that must hold, and `panic("message")` for states that should be impossible.

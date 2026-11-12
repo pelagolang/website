@@ -16,6 +16,7 @@ The library has two parts.
 | [`std.path`](./path.md) | Join, split and clean paths as text. |
 | [`std.time`](./time.md) | Clocks, durations and sleeping. |
 | [`std.env`](./env.md) | Environment variables. |
+| [`std.random`](./random.md) | Random numbers: from the system, or from a seeded generator you can replay. |
 | [`std.os`](./os.md) | The process: arguments and exit status. |
 | [`std.json`](./json.md) | Parse and write JSON. |
 | [`std.regex`](./regex.md) | Regular expressions. |

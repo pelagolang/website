@@ -29,4 +29,4 @@ false none
 default
 ```
 
-Like `main(args)`, this reads the program's start-up block, which Windows programs do not have yet; the build says so.
+Like `main(args)`, this works on Linux and Windows (x86-64 and AArch64) and in the interpreter; macOS has neither yet, and the build says so.

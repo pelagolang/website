@@ -21,7 +21,7 @@ The shell cannot find the executable.
 
 ## `stopped: ...` and a non-zero exit status
 
-Your program ended because it broke a rule the language enforces at run time, such as `stopped: arithmetic overflow` or `stopped: index out of range`. These are not crashes of the compiler. Fix the value that caused it, or handle the case before the faulty operation.
+Your program ended because it broke a rule the language enforces at run time, such as `main:12: stopped: arithmetic overflow` or `main:7: stopped: index out of range`. The message names the file and line of the check that failed, so start there. These are not crashes of the compiler. Fix the value that caused it, or handle the case before the faulty operation.
 
 ## `error: cannot find value ...` after a type error
 
