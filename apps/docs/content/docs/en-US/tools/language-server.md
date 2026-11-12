@@ -3,7 +3,7 @@ title: Language server
 description: Editor features from pelago lsp.
 ---
 
-`pelago lsp` is a language server built into the compiler. It speaks the Language Server Protocol over standard input and output, so any editor with a client can use it. The [VS Code and Zed extensions](../getting-started/editors) start it for you.
+`pelago lsp` is a language server built into the compiler. It speaks the Language Server Protocol over standard input and output, so any editor with a client can use it. The [VS Code and Zed extensions](../getting-started/editors.md) start it for you.
 
 ## Features
 
@@ -18,7 +18,7 @@ description: Editor features from pelago lsp.
 | Signature help | The parameters of a call. |
 | Outline | The functions and types of the current file. |
 | Semantic colours | Highlighting that knows functions from methods and types from variables. |
-| Formatting | The same layout as [`pelago fmt`](./formatter). |
+| Formatting | The same layout as [`pelago fmt`](./formatter.md). |
 
 ## Limits
 

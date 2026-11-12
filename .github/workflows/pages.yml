@@ -46,6 +46,7 @@ jobs:
         run: |
           npm ci
           npm run build
+          node scripts/check-links.mjs
         env:
           NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
           SITE_URL: ${{ steps.pages.outputs.origin }}

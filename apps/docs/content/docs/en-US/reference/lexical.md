@@ -24,7 +24,7 @@ Source files are UTF-8 and end in `.pel`. A newline ends a statement; there are 
 
 A name starts with a letter or underscore and continues with letters, digits and underscores. Names are case-sensitive. Type names are lowercase by convention.
 
-Keywords are listed in [Keywords](./keywords). A hard keyword can never be used as a name; a soft keyword is special only where the grammar expects it, so `from`, `to`, `step`, `it` and similar words remain usable as ordinary names elsewhere.
+Keywords are listed in [Keywords](./keywords.md). A hard keyword can never be used as a name; a soft keyword is special only where the grammar expects it, so `from`, `to`, `step`, `it` and similar words remain usable as ordinary names elsewhere.
 
 ## Integer literals
 
@@ -82,4 +82,4 @@ Ada has 3 letters, nested: Ada
 
 ## Punctuation
 
-Operators use the longest match, so `>>=` is one token. They are described in [Operators](./operators).
+Operators use the longest match, so `>>=` is one token. They are described in [Operators](./operators.md).

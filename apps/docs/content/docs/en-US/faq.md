@@ -9,7 +9,7 @@ Systems programming where you want native executables, predictable behaviour and
 
 ## How is memory managed without a garbage collector?
 
-Every value has one owner. A value is released when its owner goes out of scope, and passing it with `sink` or assigning it moves it to a new owner. There is no borrow checker to learn: references last only for a call or a statement. See [Ownership and memory](./guide/ownership).
+Every value has one owner. A value is released when its owner goes out of scope, and passing it with `sink` or assigning it moves it to a new owner. There is no borrow checker to learn: references last only for a call or a statement. See [Ownership and memory](./guide/ownership.md).
 
 ## Why do calls say `inout`, `sink` and `!`?
 
@@ -17,7 +17,7 @@ So that reading a line of code tells you what it can change or consume, without 
 
 ## Does Pelago have exceptions or null?
 
-No. A function that can fail returns a result (`T ! E`), a value that may be missing is an option (`T?`), and `?` passes a failure up. Faults that are bugs, such as overflow or an out-of-range index, stop the program with a message. See [Errors and options](./guide/errors).
+No. A function that can fail returns a result (`T ! E`), a value that may be missing is an option (`T?`), and `?` passes a failure up. Faults that are bugs, such as overflow or an out-of-range index, stop the program with a message. See [Errors and options](./guide/errors.md).
 
 ## Why does integer overflow stop my program?
 
@@ -25,15 +25,15 @@ Because silently wrapping around is rarely what you meant. When you do want wrap
 
 ## Why does `//` give an error?
 
-Pelago comments are `///` for a line and `///* ... *///` for a block, and `//~` for documentation. The error message tells you which one to use. See [Comments and style](./guide/comments).
+Pelago comments are `///` for a line and `///* ... *///` for a block, and `//~` for documentation. The error message tells you which one to use. See [Comments and style](./guide/comments.md).
 
 ## Which systems can I build for?
 
-Linux and Windows, on x86-64 and AArch64, from any of those systems. See [Targets](./tools/targets).
+Linux and Windows, on x86-64 and AArch64, from any of those systems. See [Targets](./tools/targets.md).
 
 ## Is there an installer or a package manager?
 
-Not yet. You build the `pelago` tool from source, as described in [Install](./getting-started/install). The compiler is the only tool you need.
+Not yet. You build the `pelago` tool from source, as described in [Install](./getting-started/install.md). The compiler is the only tool you need.
 
 ## Is the compiler written in Pelago?
 

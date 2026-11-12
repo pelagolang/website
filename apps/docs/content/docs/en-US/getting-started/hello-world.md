@@ -82,4 +82,4 @@ pelago build -o hello hello.pel
 ./hello
 ```
 
-`build` writes a native executable. Use `hello.exe` and `.\hello` in PowerShell on Windows. The next page covers the commands and their options, and the [tour](../tour) introduces the rest of the language.
+`build` writes a native executable. Use `hello.exe` and `.\hello` in PowerShell on Windows. The next page covers the commands and their options, and the [tour](../tour/index.md) introduces the rest of the language.

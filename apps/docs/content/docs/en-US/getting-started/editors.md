@@ -7,7 +7,7 @@ Pelago has extensions for VS Code and Zed, and a Tree-sitter grammar for everyth
 
 ## The language server
 
-Both extensions start `pelago lsp` in the background. It provides errors as you type, hover information, go to definition, find references, completion and a document outline. For this to work, install the `pelago` tool first (see [Install](./install)) and confirm that `pelago` runs in a new terminal. On Windows, restart the editor after changing `PATH`.
+Both extensions start `pelago lsp` in the background. It provides errors as you type, hover information, go to definition, find references, completion and a document outline. For this to work, install the `pelago` tool first (see [Install](./install.md)) and confirm that `pelago` runs in a new terminal. On Windows, restart the editor after changing `PATH`.
 
 ## VS Code
 

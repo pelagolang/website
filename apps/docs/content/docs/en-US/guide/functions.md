@@ -96,7 +96,7 @@ fn main() {
 main:5:9: error: the argument `xs` is changed in place; write `inout ...` at the call
 ```
 
-Methods follow the same idea with a mark on the method name: `list.push!(x)` changes the receiver and `task.join!!()` uses it up. See [Ownership](./ownership).
+Methods follow the same idea with a mark on the method name: `list.push!(x)` changes the receiver and `task.join!!()` uses it up. See [Ownership](./ownership.md).
 
 ## Short spellings
 

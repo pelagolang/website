@@ -16,8 +16,8 @@ A `path` is a `.pel` file or a folder. With a folder, all the files in it are co
 | `pelago check <path>` | Parse, resolve names and check types. Prints the errors and a summary such as `18 modules, 1856 definitions, 0 errors`. |
 | `pelago run <path>` | Build machine code in memory and run `main`. |
 | `pelago build [-o out] <path>` | Write a native executable. |
-| `pelago fmt [--check] <path>...` | Format source files. See [Formatter](./formatter). |
-| `pelago lsp` | Run the language server on standard input and output. See [Language server](./language-server). |
+| `pelago fmt [--check] <path>...` | Format source files. See [Formatter](./formatter.md). |
+| `pelago lsp` | Run the language server on standard input and output. See [Language server](./language-server.md). |
 
 ## `run`
 
@@ -43,7 +43,7 @@ A `path` is a `.pel` file or a folder. With a folder, all the files in it are co
 | `--leak-check` | Build with allocation counting; the program exits with status 3 and reports `leaked N allocation(s)` if memory remains. |
 | `--stats`, `--timings` | Compiler diagnostics. |
 
-See [Targets](./targets).
+See [Targets](./targets.md).
 
 ## Looking inside the compiler
 

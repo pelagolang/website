@@ -28,7 +28,7 @@ Arithmetic on every integer type is checked: a result that does not fit stops th
 | Type | Example | Meaning |
 | --- | --- | --- |
 | Tuple | `(int, string)` | A fixed group of values; fields are `t.0`, `t.1`. |
-| Braid | `(int, string; 4)` | A fixed-size run whose types repeat in a cycle. See [Braids](../guide/braids). |
+| Braid | `(int, string; 4)` | A fixed-size run whose types repeat in a cycle. See [Braids](../guide/braids.mdx). |
 | List | `[int]` or `list<int>` | A growable sequence. |
 | Map | `map<string, int>` | Keys with values. |
 | Set | `set<int>` | Unique values. |
@@ -48,7 +48,7 @@ A function without a result type returns nothing.
 
 ## Types you define
 
-`struct`, `enum`, `obj` and `interface` declare new types; see the [guide](../guide/types). A value of type `any shape` holds any type that implements the interface `shape`. Generic types and functions take type parameters in angle brackets, optionally bounded: `fn largest<T: order>(a: T, b: T) -> T`.
+`struct`, `enum`, `obj` and `interface` declare new types; see the [guide](../guide/types.md). A value of type `any shape` holds any type that implements the interface `shape`. Generic types and functions take type parameters in angle brackets, optionally bounded: `fn largest<T: order>(a: T, b: T) -> T`.
 
 Standard interfaces include `order` (comparison with `<`), `eq`, `show` (conversion to text), and the operator interfaces `add`, `sub`, `mul`, `div`, `rem` and `neg`, which a type implements to support the matching operator.
 
