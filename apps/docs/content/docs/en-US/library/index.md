@@ -14,6 +14,8 @@ The library has two parts.
 | [`std.io`](./io.md) | Standard input and standard error. |
 | [`std.fs`](./fs.md) | Read and write files by path. |
 | [`std.path`](./path.md) | Join, split and clean paths as text. |
+| [`std.time`](./time.md) | Clocks, durations and sleeping. |
+| [`std.env`](./env.md) | Environment variables. |
 | [`std.os`](./os.md) | The process: arguments and exit status. |
 | [`std.json`](./json.md) | Parse and write JSON. |
 | [`std.regex`](./regex.md) | Regular expressions. |

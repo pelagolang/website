@@ -148,6 +148,34 @@ cancelled
 end
 ```
 
+## Waiting and timeouts
+
+`time.sleep(duration)` parks the running task until the time has passed; other tasks keep running, and nothing spins. A `select` can give up after a time with the arm `case timeout(duration)`, which runs if no other arm is ready by then. Clocks and sleep exist on Linux builds only for now.
+
+```pelago
+import std.time
+
+fn main() {
+    const (tx, rx) = chan<int>()
+    select {
+        case v = rx.recv() { print("got") }
+        case timeout(time.millis(5)) { print("timed out") }
+    }
+    tx.send(7)
+    select {
+        case v = rx.recv() { print("got #(v)") }
+        case timeout(time.millis(5)) { print("timed out") }
+    }
+}
+```
+
+```text
+timed out
+got some(7)
+```
+
+A task that waits on a channel, lock, semaphore or barrier is parked, not polling. If every task is parked and nothing can wake one, the program stops with a deadlock report instead of hanging.
+
 ## Ending the program
 
 Returning from `main` ends the program. A task that was started with a plain `spawn` and never joined is abandoned at that point: it does not keep running after `main`. Join what you need, or start it inside a `scope`, which always waits.

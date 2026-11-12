@@ -17,7 +17,33 @@ Flags are switched on for the rest of the group: `(?i)` ignores case, `(?s)` let
 
 Lookahead `(?=...)` and `(?!...)` is supported and stays linear: each lookahead body is run once over the whole text, backwards, instead of once per position. Lookbehind is refused with a parse error.
 
-Matching works on bytes, so `.` and classes see UTF-8 text one byte at a time.
+Matching works on bytes, so `.` and classes see UTF-8 text one byte at a time, unless the pattern starts with `(?u)` (see Unicode mode below).
+
+## Unicode mode
+
+By default matching works on bytes. Start a pattern with `(?u)` (or a combined flag such as `(?ui)`) to match Unicode characters instead: `.` and classes take a whole character, `\b` and `\B` follow Unicode word characters, `\p{L}`-style general categories are available, and `(?i)` uses Python's case folds. Scripts (`\p{Greek}`), folds that expand to several characters, and lookahead or backreferences in Unicode mode at run time are not supported yet. At run time `(?u)` must be the first thing in the pattern; the `std.regexunicode` module holds the tables.
+
+```pelago
+import std.regex
+
+@regex("(?u)(?<first>[à-ÿ]+)-(?<second>[α-ω]+)(?<mark>.)")
+struct mixed {
+    first: string
+    second: string
+    mark: string
+}
+
+fn main() {
+    switch mixedFind("x été-αβγ😀 y") {
+        case some(m): print(m.first, m.second, m.mark)
+        case none: print("none")
+    }
+}
+```
+
+```text
+é αβγ 😀
+```
 
 ## Methods
 

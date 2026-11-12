@@ -87,4 +87,4 @@ When you lock against a registry, Islet checks the signed head and the witnesses
 
 A key holder can ask for their own key to be revoked with a request signed by that key, and the registry operator can revoke too; clients treat both the same.
 
-Not built yet: looking up yanks and revocations without reading the whole log, which a large registry will need.
+The first audit of a registry reads every log entry. Later audits fetch only the entries added since, and carry on from a summary saved in the store (`<store>/registries/<origin>.audit`). Not built yet: looking up one yank or revocation without that summary, which grows with the log and will need an index for a very large registry.
