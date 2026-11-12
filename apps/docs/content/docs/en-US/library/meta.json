@@ -2,5 +2,5 @@
   "title": "Standard library",
   "description": "core and std",
   "root": true,
-  "pages": ["index", "lists", "maps-and-sets", "strings", "numbers", "options-and-results", "io", "fs", "path", "time", "env", "random", "os", "json", "regex", "big"]
+  "pages": ["index", "lists", "maps-and-sets", "strings", "numbers", "options-and-results", "io", "fs", "path", "time", "env", "random", "hash", "sha2", "mac", "kdf", "os", "json", "regex", "big"]
 }

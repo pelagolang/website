@@ -17,6 +17,10 @@ The library has two parts.
 | [`std.time`](./time.md) | Clocks, durations and sleeping. |
 | [`std.env`](./env.md) | Environment variables. |
 | [`std.random`](./random.md) | Random numbers: from the system, or from a seeded generator you can replay. |
+| [`std.hash`](./hash.md) | The streaming hash interface, hex helpers and a constant-time compare. |
+| [`std.sha2`](./sha2.md) | SHA-224, SHA-256, SHA-384, SHA-512 and the SHA-512/t variants. |
+| [`std.mac`](./mac.md) | HMAC over any hash. |
+| [`std.kdf`](./kdf.md) | HKDF and PBKDF2 key derivation. |
 | [`std.os`](./os.md) | The process: arguments and exit status. |
 | [`std.json`](./json.md) | Parse and write JSON. |
 | [`std.regex`](./regex.md) | Regular expressions. |
