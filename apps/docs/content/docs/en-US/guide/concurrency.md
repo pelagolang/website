@@ -150,7 +150,7 @@ end
 
 ## Waiting and timeouts
 
-`time.sleep(duration)` parks the running task until the time has passed; other tasks keep running, and nothing spins. A `select` can give up after a time with the arm `case timeout(duration)`, which runs if no other arm is ready by then. Clocks and sleep exist on Linux builds only for now.
+`time.sleep(duration)` parks the running task until the time has passed; other tasks keep running, and nothing spins. A `select` can give up after a time with the arm `case timeout(duration)`, which runs if no other arm is ready by then. On Linux, when every task is waiting, the program sleeps in the kernel until the first deadline, so waiting costs no processor time. Windows has clocks but no sleep call yet, so there waiting checks the clock instead; macOS has no clock yet.
 
 ```pelago
 import std.time
@@ -175,6 +175,39 @@ got some(7)
 ```
 
 A task that waits on a channel, lock, semaphore or barrier is parked, not polling. If every task is parked and nothing can wake one, the program stops with a deadlock report instead of hanging.
+
+## Sharing state
+
+Most programs need only tasks and channels. When tasks must share a value, two library types make that safe. `copy handle` gives another handle to the same value, and each task takes its own.
+
+- `lock(value)` holds a value that one task changes at a time. The only way in is `with`, which gives a closure a temporary `inout` and releases the lock when the closure returns, so a lock cannot be forgotten. `withWhen(ready, f)` waits until `ready(value)` is true first.
+- `atomic(n)` holds an `int` that tasks read and change without a lock: `load()`, `store(v)`, `add(d)` and `swap(v)` (the last two return the old value), and `compareSwap(expected, desired)`, which stores only if the value is still `expected` and says whether it did. Every operation is sequentially consistent; there are no weaker orders to pick from.
+
+```pelago
+fn main() {
+    const total = lock(0)
+    const hits = atomic(0)
+    scope s {
+        for i of 1..4 {
+            const t = copy total
+            const h = copy hits
+            s.spawn(() ~> {
+                t.with(n ~> { n += i })
+                h.add(1)
+            })
+        }
+    }
+    print(total.with(n ~> n), hits.load())
+    print(hits.compareSwap(3, 10), hits.compareSwap(3, 11), hits.swap(0), hits.load())
+}
+```
+
+```text
+6 3
+true false 10 0
+```
+
+`semaphore(n)` limits how many tasks do something at once (`acquire` waits for a permit and `release` returns one), and `barrier(n)` holds tasks until all `n` have called `wait()`. Tasks run one at a time for now and real threads are still to come; each atomic operation is a call into the runtime.
 
 ## Ending the program
 

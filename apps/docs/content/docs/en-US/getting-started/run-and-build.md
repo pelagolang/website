@@ -89,7 +89,7 @@ fn main() {
 stopped: arithmetic overflow
 ```
 
-Overflow is never silently wrapped, in debug or optimised builds alike.
+The real message starts with the file and line (`main:3: stopped: arithmetic overflow`). Overflow is never silently wrapped, in debug or optimised builds alike.
 
 ## Formatting
 

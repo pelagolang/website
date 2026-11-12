@@ -54,6 +54,8 @@ fn main() {
 true
 ```
 
-Clocks and `sleep` work on Linux (x86-64 and AArch64). On Windows and macOS there is no clock call yet, so the clock functions return an `io_error` and `sleep` stops the program with "no clock on this target yet". With nothing else to run, `sleep` waits by watching the clock instead of asking the system to pause, so it uses a processor while it waits.
+The clocks work on Linux (x86-64 and AArch64) and on Windows (x86-64 and ARM64). macOS has no clock call yet, so there the clock functions return an `io_error` and `sleep` stops the program with "no clock on this target yet".
+
+`sleep` asks the kernel to pause when every task is waiting, so it costs no processor time on Linux. Windows has no sleep call yet: there `sleep` still waits correctly, but by checking the clock again and again, so it uses a processor while it waits.
 
 `select` can use a duration as a time limit: see [Concurrency](../guide/concurrency.md).
