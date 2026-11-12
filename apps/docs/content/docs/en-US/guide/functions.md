@@ -122,7 +122,7 @@ fn main() {
 3
 ```
 
-The marks work wherever a mode does: parameters, arguments, `for x! of xs`, `switch xs! { }`, patterns and closure captures such as `[total!, data!!] x ~> ...`. Writing both on one name (`inout x!`) is an error. They are not available inside function types, where `T!E` already means a result type; write `fn(inout int)` there.
+The marks work wherever a mode does: parameters, arguments, `for x! of xs`, `switch xs! { }`, patterns and closure captures such as `[total!, data!!] x ~> ...`. Writing both on one name (`inout x!`) is an error. In a function type the mark follows the parameter type: `fn(int!)` is `fn(inout int)` and `fn(string!!)` is `fn(sink string)`. A bang before `,` or `)` is a mark; a bang followed by a type is still a result type, so `fn(int!string)` takes a `result`.
 
 ## Closures
 
