@@ -40,7 +40,7 @@ Because two names never share one mutable value, there are no hidden changes thr
 
 ## Reading, changing and giving away
 
-Functions say how they use an argument, and so do the calls ([Functions](./functions) has the table). `sink` hands ownership over. After the call the caller no longer has the value:
+Functions say how they use an argument, and so do the calls ([Functions](./functions.md) has the table). `sink` hands ownership over. After the call the caller no longer has the value:
 
 ```pelago
 fn count(sink xs: [int]) -> int = xs.len()
@@ -133,7 +133,7 @@ round 1
 end of round 1
 ```
 
-A deferred body cannot itself `return`, `?`, `break`, `continue` or `become`, and it cannot produce a result. A [stop](./errors) ends the program without running deferred statements.
+A deferred body cannot itself `return`, `?`, `break`, `continue` or `become`, and it cannot produce a result. A [stop](./errors.md) ends the program without running deferred statements.
 
 To check that a program releases everything it allocates, run or build it with `--leak-check`. If memory is still allocated when the program ends, it reports `leaked N allocation(s)` and exits with status 3.
 

@@ -127,7 +127,7 @@ A braid is laid out slot by slot in the order written, each at its natural align
 
 ## JSON
 
-With `@derive(fromJson)` and `@derive(toJson)`, a braid is one flat JSON array with one element per slot: `(int, string; 3)` is `[7, "seven", 8]`. An array of pairs, `[(int, string); 2]`, is an array of two-element arrays. Decoding checks the count: `$: expected 3 elements, found 4`. See [std.json](../library/json).
+With `@derive(fromJson)` and `@derive(toJson)`, a braid is one flat JSON array with one element per slot: `(int, string; 3)` is `[7, "seven", 8]`. An array of pairs, `[(int, string); 2]`, is an array of two-element arrays. Decoding checks the count: `$: expected 3 elements, found 4`. See [std.json](../library/json.md).
 
 ## Not available yet
 

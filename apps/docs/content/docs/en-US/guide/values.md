@@ -42,7 +42,7 @@ Pelago 16
 | `float` | `3.14`, `1e-3` | 64-bit floating point. |
 | `bool` | `true`, `false` | |
 | `char` | `'a'`, `'\t'` | One Unicode character. |
-| `string` | `"hello"` | Text. See [Collections and strings](./collections). |
+| `string` | `"hello"` | Text. See [Collections and strings](./collections.md). |
 
 Sized integers (`int8`, `uint8`, `int16`, `uint16`, `int32`, `uint32`, `int64` and so on) exist for compact data and file formats.
 
@@ -122,7 +122,7 @@ fn main() {
 1 two
 ```
 
-When the types should take turns in a fixed-size run, such as `(int, string; 4)`, use a [braid](./braids).
+When the types should take turns in a fixed-size run, such as `(int, string; 4)`, use a [braid](./braids.mdx).
 
 ## Conditions
 

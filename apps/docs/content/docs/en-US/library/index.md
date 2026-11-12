@@ -11,19 +11,19 @@ The library has two parts.
 
 | Module | Purpose |
 | --- | --- |
-| [`std.io`](./io) | Standard input and standard error. |
-| [`std.fs`](./fs) | Read and write files by path. |
-| [`std.path`](./path) | Join, split and clean paths as text. |
-| [`std.os`](./os) | The process: arguments and exit status. |
-| [`std.json`](./json) | Parse and write JSON. |
-| [`std.regex`](./regex) | Regular expressions. |
-| [`std.big`](./big) | Integers of any size. |
+| [`std.io`](./io.md) | Standard input and standard error. |
+| [`std.fs`](./fs.md) | Read and write files by path. |
+| [`std.path`](./path.md) | Join, split and clean paths as text. |
+| [`std.os`](./os.md) | The process: arguments and exit status. |
+| [`std.json`](./json.md) | Parse and write JSON. |
+| [`std.regex`](./regex.md) | Regular expressions. |
+| [`std.big`](./big.md) | Integers of any size. |
 
 ## Pages
 
-- [Lists](./lists), [Maps and sets](./maps-and-sets)
-- [Strings](./strings), [Numbers](./numbers)
-- [Options and results](./options-and-results)
+- [Lists](./lists.md), [Maps and sets](./maps-and-sets.md)
+- [Strings](./strings.md), [Numbers](./numbers.md)
+- [Options and results](./options-and-results.md)
 
 ## The prelude
 

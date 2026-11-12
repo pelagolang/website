@@ -3,7 +3,7 @@ title: Options and results
 description: Methods of T? and T ! E.
 ---
 
-See [Errors and options](../guide/errors) for how to use them.
+See [Errors and options](../guide/errors.md) for how to use them.
 
 ## Options (`T?`)
 

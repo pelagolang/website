@@ -51,3 +51,7 @@ The app is a static export (`output: 'export'`): `npm run build` writes plain fi
 - `NEXT_PUBLIC_BASE_PATH` sets the folder the site is served from (`/website` on a project site). Leave it unset for a custom domain or a local build.
 
 Set `SITE_URL` for absolute URLs in the page metadata; no domain is hard-coded.
+
+## Links between pages
+
+Link to the Markdown file, not to a bare name: `[Ownership](./ownership.md)`, `[Types](../guide/types.md)`, `[Tour](../tour/index.md)`. A bare `./ownership` is left alone and the browser resolves it against the page URL, which gives a 404. The build rewrites a file link to the page in the reader's language and stops with an error when the file does not exist. `/docs/...` also works, and a path such as `/benchmarks/` is a page of the marketing site. `node scripts/check-links.mjs` (after `npm run build`) checks every link in the built pages, and CI runs it.

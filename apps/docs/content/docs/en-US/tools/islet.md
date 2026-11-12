@@ -17,7 +17,7 @@ Islet is young. There is no public registry yet, and packages come from a folder
 | `deps/` | Where `islet install` links the locked packages, with `deps/map.yaml` for the compiler. |
 | `monorepo.yaml` | For a workspace: one shared list of dependency versions that members can use with `from: monorepo`. |
 
-All of these are written in the same strict block-style subset of YAML as [`pelago.yaml`](./pelago-yaml).
+All of these are written in the same strict block-style subset of YAML as [`pelago.yaml`](./pelago-yaml.md).
 
 ```yaml
 format: 1

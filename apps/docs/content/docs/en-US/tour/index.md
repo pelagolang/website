@@ -3,7 +3,7 @@ title: A tour of Pelago
 description: A guided walk through the language in ten short steps, with a program for each.
 ---
 
-This tour introduces Pelago by example. Each step is a complete program: save it as a `.pel` file and run it with `pelago run`. The [language guide](../guide/values) covers every topic in depth.
+This tour introduces Pelago by example. Each step is a complete program: save it as a `.pel` file and run it with `pelago run`. The [language guide](../guide/values.md) covers every topic in depth.
 
 ## 1. Values and variables
 
@@ -242,4 +242,4 @@ answer: 42
 
 ## Where next
 
-The [language guide](../guide/values) goes through each of these topics in turn, and [Run and build](../getting-started/run-and-build) lists everything the `pelago` tool can do.
+The [language guide](../guide/values.md) goes through each of these topics in turn, and [Run and build](../getting-started/run-and-build.md) lists everything the `pelago` tool can do.

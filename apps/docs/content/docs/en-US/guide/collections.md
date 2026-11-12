@@ -164,4 +164,4 @@ ab
 
 Text that is not stored by itself, such as the pieces returned by `split` or `trim`, has the type `str`, a view into another string. Most methods accept both.
 
-Parse numbers from text with `parseInt()` and `parseFloat()`. They return a result, because the text may not be a number; see [Errors and options](./errors).
+Parse numbers from text with `parseInt()` and `parseFloat()`. They return a result, because the text may not be a number; see [Errors and options](./errors.md).

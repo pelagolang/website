@@ -3,7 +3,7 @@ title: Lists
 description: Methods of [T], the growable list.
 ---
 
-A list is written `[T]` (or `list<T>`) with a literal such as `[1, 2, 3]`. See [Collections and strings](../guide/collections) for an introduction.
+A list is written `[T]` (or `list<T>`) with a literal such as `[1, 2, 3]`. See [Collections and strings](../guide/collections.md) for an introduction.
 
 | Method | Result | Notes |
 | --- | --- | --- |

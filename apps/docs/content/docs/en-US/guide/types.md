@@ -88,7 +88,7 @@ bad range
 
 ## Enums
 
-An `enum` is a choice between named cases, and each case can carry fields. Use `switch` to take one apart; see [Pattern matching](./switch).
+An `enum` is a choice between named cases, and each case can carry fields. Use `switch` to take one apart; see [Pattern matching](./switch.md).
 
 ```pelago
 enum shape {

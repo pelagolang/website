@@ -29,7 +29,7 @@ If you would rather not install it, `cargo build --release` leaves the tool at `
 pelago run examples/hello.pel
 ```
 
-You should see `Hello, world`. If the shell cannot find `pelago`, see [Troubleshooting](./troubleshooting).
+You should see `Hello, world`. If the shell cannot find `pelago`, see [Troubleshooting](./troubleshooting.md).
 
 ## Supported targets
 
@@ -38,8 +38,8 @@ You should see `Hello, world`. If the shell cannot find `pelago`, see [Troublesh
 | Linux (ELF) | x86-64, AArch64 |
 | Windows (PE) | x86-64, AArch64 |
 
-Cross-compiling needs no extra tools: `pelago build --target=windows` on Linux produces a Windows executable, and the other way round. See [Run and build](./run-and-build).
+Cross-compiling needs no extra tools: `pelago build --target=windows` on Linux produces a Windows executable, and the other way round. See [Run and build](./run-and-build.md).
 
 ## Next
 
-Write your first program in [Hello, world](./hello-world).
+Write your first program in [Hello, world](./hello-world.md).

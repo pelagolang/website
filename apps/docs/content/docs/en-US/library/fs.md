@@ -61,4 +61,4 @@ fn main() {
 failed: notFound
 ```
 
-Standard input has the same shape in [std.io](./io): `io.readLine()`, `io.readAll()` and `io.readBytes()` never stop the program on a read error, and `io.tryReadLine()` and `io.tryReadAll()` return the `io_error` instead.
+Standard input has the same shape in [std.io](./io.md): `io.readLine()`, `io.readAll()` and `io.readBytes()` never stop the program on a read error, and `io.tryReadLine()` and `io.tryReadAll()` return the `io_error` instead.
