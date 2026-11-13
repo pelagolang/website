@@ -44,7 +44,7 @@ Pelago 16
 | `char` | `'a'`, `'\t'` | One Unicode character. |
 | `string` | `"hello"` | Text. See [Collections and strings](./collections.md). |
 
-Sized integers (`int8`, `uint8`, `int16`, `uint16`, `int32`, `uint32`, `int64` and so on) exist for compact data and file formats.
+Sized integers (`int8`, `uint8`, `int16`, `uint16`, `int32`, `uint32`, `int64` and so on) exist for compact data and file formats. For values beyond 64 bits there are `int128`, `uint128`, `int256` and `uint256`; see [Wide integers](../library/wide-integers.md).
 
 Underscores in numbers are ignored, so `1_000_000` is one million.
 
