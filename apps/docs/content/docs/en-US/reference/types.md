@@ -10,7 +10,9 @@ description: The built-in types and how types are written.
 | `int`, `uint` | The default signed integer (64 bits) and the unsigned machine integer. |
 | `int8`, `int16`, `int32`, `int64` | Signed integers of a given width. |
 | `uint8`, `uint16`, `uint32`, `uint64` | Unsigned integers of a given width. `byte` is another name for `uint8`. |
+| `int128`, `uint128`, `int256`, `uint256` | Wide integers, with the same checked arithmetic. See [Wide integers](../library/wide-integers.md). |
 | `float`, `float32` | IEEE 754 floating point, 64 and 32 bits. |
+| `float16`, `float128`, `float256` | IEEE 754 formats implemented in software. See [Wide and narrow floats](../library/wide-floats.md). |
 
 Arithmetic on every integer type is checked: a result that does not fit stops the program. A narrower integer is made from an `int` explicitly with `wrapToByte()`, `toByteChecked()` and the matching methods for the other widths (`wrapToInt16`, `toInt32Checked`, ...). The first wraps around and the second returns an option.
 

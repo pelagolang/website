@@ -29,7 +29,7 @@ The library has two parts.
 ## Pages
 
 - [Lists](./lists.md), [Maps and sets](./maps-and-sets.md)
-- [Strings](./strings.md), [Numbers](./numbers.md)
+- [Strings](./strings.md), [Numbers](./numbers.md), [Wide integers](./wide-integers.md), [Wide and narrow floats](./wide-floats.md)
 - [Options and results](./options-and-results.md)
 
 ## The prelude
