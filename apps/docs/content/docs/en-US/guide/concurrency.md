@@ -150,7 +150,7 @@ end
 
 ## Waiting and timeouts
 
-`time.sleep(duration)` parks the running task until the time has passed; other tasks keep running, and nothing spins. A `select` can give up after a time with the arm `case timeout(duration)`, which runs if no other arm is ready by then. On Linux, when every task is waiting, the program sleeps in the kernel until the first deadline, so waiting costs no processor time. Windows has clocks but no sleep call yet, so there waiting checks the clock instead; macOS has no clock yet.
+`time.sleep(duration)` parks the running task until the time has passed; other tasks keep running, and nothing spins. A `select` can give up after a time with the arm `case timeout(duration)`, which runs if no other arm is ready by then. On Linux and macOS, when every task is waiting, the program sleeps in the kernel until the first deadline, so waiting costs no processor time. Windows has clocks but no sleep call yet, so there waiting checks the clock instead.
 
 ```pelago
 import std.time
