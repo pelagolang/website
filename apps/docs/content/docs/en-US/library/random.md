@@ -9,7 +9,7 @@ import std.random
 
 There are two sources, and you choose between them on purpose.
 
-- **The system's generator** gives numbers that never repeat and cannot be replayed. It can fail, so each function returns an `io_error` on failure: where the target has no such call yet (macOS) or when the system refuses.
+- **The system's generator** gives numbers that never repeat and cannot be replayed. It can fail, so each function returns an `io_error` on failure: when the system refuses it, or on a target with no such call.
 - **A seeded `rng`** gives the same numbers for the same seed, on every machine and every target. It cannot fail, so its methods return plain values.
 
 Neither is for secrets: an `rng` is a small, fast generator (splitmix64), not a cipher.

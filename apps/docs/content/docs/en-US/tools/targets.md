@@ -9,6 +9,7 @@ description: Which systems Pelago builds for, and how to cross-compile.
 | --- | --- | --- |
 | Linux | yes | yes |
 | Windows | yes | yes |
+| macOS | no | yes (`--target=macos --arch=aarch64`) |
 
 Choose the target with `--target` and `--arch`. Any build machine can produce any combination:
 

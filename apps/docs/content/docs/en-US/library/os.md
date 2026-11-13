@@ -9,7 +9,7 @@ import std.os
 
 | Item | Notes |
 | --- | --- |
-| `main(args: [string])` | `main` may declare a list of strings as its parameter. The first element is the program name. Works on Linux and Windows (x86-64 and AArch64); not on macOS yet. |
+| `main(args: [string])` | `main` may declare a list of strings as its parameter. The first element is the program name. Works in the interpreter and on Linux, Windows and macOS builds. |
 | `os.exit(code)` | End the program at once with this status. Standard output is flushed, but `deinit` does not run. |
 
 ```pelago exit

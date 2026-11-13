@@ -74,7 +74,7 @@ failed: notFound
 | `fs.rename(from, to)` | `void ! io_error` | Move or rename. |
 | `fs.readDir(path)` | `[string] ! io_error` | The names in a folder, sorted. |
 
-The path and folder calls run in the interpreter and on Linux (x86-64 and AArch64). On Windows and macOS they return an `io_error` of kind `other` for now.
+The path and folder calls, `readDir` included, work in the interpreter and on Linux (x86-64 and AArch64), Windows (x86-64 and ARM64) and macOS (AArch64). The macOS and Windows ARM64 paths are tested only by the project's CI jobs for those systems.
 
 ```pelago
 import std.fs

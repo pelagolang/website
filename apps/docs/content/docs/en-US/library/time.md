@@ -70,9 +70,9 @@ fn main() {
 true
 ```
 
-The clocks work on Linux (x86-64 and AArch64) and on Windows (x86-64 and ARM64). macOS has no clock call yet, so there the clock functions return an `io_error` and `sleep` stops the program with "no clock on this target yet".
+The clocks work on Linux (x86-64 and AArch64), Windows (x86-64 and ARM64) and macOS (AArch64).
 
-`sleep` asks the kernel to pause when every task is waiting, so it costs no processor time on Linux. Windows has no sleep call yet: there `sleep` still waits correctly, but by checking the clock again and again, so it uses a processor while it waits.
+`sleep` asks the kernel to pause when every task is waiting, so it costs no processor time on Linux and macOS. Windows has no sleep call yet: there `sleep` still waits correctly, but by checking the clock again and again, so it uses a processor while it waits.
 
 `select` can use a duration as a time limit: see [Concurrency](../guide/concurrency.md).
 
@@ -84,4 +84,4 @@ The module is small on purpose. These are missing today, so write them yourself 
 - **Scaling a duration.** `d * 2` and `d / 2` are compile errors, because `duration` has no multiplication or division. Build the length from the number instead, for example `time.millis(n * 5)`.
 - **Instants.** An `instant` has no `<`, `==` or `print`, and no `-`. Use `a.since(b)` and compare the resulting durations. A wall-clock reading is a `duration`, not an `instant`.
 - **Timers and deadlines.** There is no timer or ticker type. For a time limit use `select` with `case timeout(d)` (see [Concurrency](../guide/concurrency.md)).
-- **Targets.** There is no clock on macOS, and no sleep call on Windows (sleeping there waits by checking the clock).
+- **Targets.** There is no sleep call on Windows yet (sleeping there waits by checking the clock).
